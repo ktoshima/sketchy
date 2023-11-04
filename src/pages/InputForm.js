@@ -17,6 +17,7 @@ const InputForm = () => {
 			<input
 				type="number"
 				step="1"
+				min="1"
 				onChange={(e) => setSlideNum(e.target.value)}
 				value={slideNum}
 				className={emptyFields.includes('sqlQuery' ? 'error' : '')}
@@ -25,6 +26,7 @@ const InputForm = () => {
 			<input
 				type="number"
 				step="1"
+				min="0"
 				onChange={(e) => setMinute(e.target.value)}
 				value={minute}
 				className={emptyFields.includes('columnMap' ? 'error' : '')}
@@ -33,6 +35,7 @@ const InputForm = () => {
 			<input
 				type="number"
 				step="1"
+				min="0"
 				onChange={(e) => setSecond(e.target.value)}
 				value={second}
 				className={emptyFields.includes('columnMap' ? 'error' : '')}
@@ -42,6 +45,7 @@ const InputForm = () => {
 			<input
 				type="number"
 				step="1"
+				min="1"
 				onChange={(e) => setIntervalSecond(e.target.value)}
 				value={intervalSecond}
 				className={emptyFields.includes('columnMap' ? 'error' : '')}
