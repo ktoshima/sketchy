@@ -47,7 +47,7 @@ const InputForm = () => {
 				type="number"
 				step="1"
 				min="1"
-				onChange={(e) => setSketchNum(e.target.value)}
+				onChange={(e) => setSketchNum(Number(e.target.value))}
 				value={sketchNum}
 				className={emptyFields.includes('sketchNum') ? 'error' : ''}
 			/>
@@ -56,7 +56,7 @@ const InputForm = () => {
 				type="number"
 				step="1"
 				min="0"
-				onChange={(e) => setMinute(e.target.value)}
+				onChange={(e) => setMinute(Number(e.target.value))}
 				value={minute}
 				className={emptyFields.includes('sketchTime') ? 'error' : ''}
 			/>
@@ -65,7 +65,7 @@ const InputForm = () => {
 				type="number"
 				step="1"
 				min="0"
-				onChange={(e) => setSecond(e.target.value)}
+				onChange={(e) => setSecond(Number(e.target.value))}
 				value={second}
 				className={emptyFields.includes('sketchTime') ? 'error' : ''}
 			/>
@@ -74,8 +74,8 @@ const InputForm = () => {
 			<input
 				type="number"
 				step="1"
-				min="1"
-				onChange={(e) => setInterval(e.target.value)}
+				min="0"
+				onChange={(e) => setInterval(Number(e.target.value))}
 				value={interval}
 				className={emptyFields.includes('interval') ? 'error' : ''}
 			/>
