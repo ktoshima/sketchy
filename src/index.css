@@ -1,3 +1,8 @@
+:root {
+  --primary: #2b2d42;
+  --error: #ef233c;
+}
+
 body {
   background-color: #30384b;
   color: #eee;
@@ -33,4 +38,26 @@ header a {
   max-width: 1200px;
   padding: 20px;
   margin: 0 auto;
+}
+
+form button {
+  background: #8d99ae;;
+  border: 0;
+  color: var(--primary);
+  padding: 15px;
+  font-size: 12pt;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+input.error, textarea.error {
+border: 1px solid var(--error);
 }
