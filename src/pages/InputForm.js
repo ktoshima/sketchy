@@ -35,13 +35,13 @@ const InputForm = () => {
 			setEmptyFields([]);
 			setError([]);
 			setSketchTime(60 * (minute ? minute : 0) + (second ? second : 0));
-			navigate("/session")
+			navigate("/session");
 		}
 	};
 
 
 	return (
-		<form action="" className="query-form" onSubmit={handleSubmit}>
+		<form action="" className="form" onSubmit={handleSubmit}>
 			<h3>Set Number of Sketch</h3>
 			<input
 				type="number"
