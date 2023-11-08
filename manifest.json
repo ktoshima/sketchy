@@ -4,7 +4,12 @@
 	"version": "0.1",
 	"homepage_url": "https://github.com/ktoshima/sketchy",
 	"browser_action": {
-		"default_popup": "index.html",
 		"default_title": "Sketchy"
-	}
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://www.google.com/search?q=horse&tbm=isch"],
+			"js": ["autoclick.js"]
+		}
+	]
 }
