@@ -6,7 +6,7 @@
 			"request": "launch",
 			"reAttach": true,
 			"name": "Launch add-on",
-			"addonPath": "${workspaceFolder}"
+			"addonPath": "${workspaceFolder}/build"
 		}
     ]
 }
