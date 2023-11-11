@@ -1,44 +1,50 @@
-const collection = document.getElementsByClassName("islib");
-console.log(collection.length);
 
-// const collectionLength = collection.length;
-const collectionLength = 10;
-let promises = [];
-for (let i = 0; i < collectionLength; ++i) {
-	collection[i].click();
-	let imgUrlPromise = new Promise((resolve, reject) => {
+const clickPromise = (htmlElement, timeout) => {
+	return new Promise((resolve) => {
 		setTimeout(() => {
-			if (collection[i].hasAttribute('href')) {
-				const parsedURL = new URL(collection[i].href);
-				resolve(parsedURL.searchParams.get("imgurl"));
-			} else {
-				reject("imgurl not found in HTMLElement");
-			}
-		}, (i+1)*1000);
+			htmlElement.click();
+			resolve();
+		}, timeout);
 	});
-	imgUrlPromise.then((imgurl) => {
-		promises.push(new Promise((resolve, reject) => {
-			setTimeout(() => {
-				imgObject = {id: i, imgurl: imgurl};
-				console.log(imgObject)
-				resolve(imgObject);
-			}, (i+2)*1000);
-		}));
-		console.log(promises);
+};
+
+const imgUrlPromise = (id, htmlElement) => {
+	return new Promise((resolve) => {
+		if (htmlElement.hasAttribute('href')) {
+			const parsedURL = new URL(htmlElement.href);
+			resolve({id: id, imgurl: parsedURL.searchParams.get('imgurl')});
+		}
+		const observer = new MutationObserver(mutations => {
+			if (htmlElement.hasAttribute('href')) {
+				observer.disconnect();
+				const parsedURL = new URL(htmlElement.href);
+				resolve({id: id, imgurl: parsedURL.searchParams.get('imgurl')});
+			}
+		});
+		observer.observe(htmlElement, {attributes: true});
 	});
 }
-Promise.all(promises).then((imgUrlList) => { console.log(imgUrlList); });
 
-// for (let i = 0; i < collectionLength; ++i) {
-// 	((idx) => {
-// 		setTimeout(() => {
-// 			collection[idx].click();
-// 		}, idx*1000)
-// 		setTimeout(() => {
-// 			const parsedURL = new URL(collection[idx].href);
-// 			imageLinkList.push({'id': idx, 'imgurl': parsedURL.searchParams.get("imgurl")});
-// 		}, (idx+1)*1000)
-// 	})(i)
-// }
+const getImgUrlObj = (id, htmlElement, timeout) => {
+	return clickPromise(htmlElement, timeout)
+		.then(() => {
+			return imgUrlPromise(id, htmlElement);
+		});
+}
+
+const collection = document.getElementsByClassName("islib");
+console.log(collection.length);
+const htmlArray = [];
+let counter = 0
+for (let key in collection) {
+	htmlArray.push(collection[key]);
+	console.log(htmlArray);
+	++counter;
+	if (counter === 10) break;
+}
+
+Promise.all(htmlArray.map((value, index) => getImgUrlObj(index, value, index*1000) ))
+	.then((array) => { console.log(array); });
+
 
 // https://www.google.com/search?q=horse&tbm=isch
