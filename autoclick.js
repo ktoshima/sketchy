@@ -14,14 +14,14 @@ const imgUrlPromise = (id, htmlElement) => {
 			const parsedURL = new URL(htmlElement.href);
 			resolve({id: id, imgurl: parsedURL.searchParams.get('imgurl')});
 		}
-		const observer = new MutationObserver(mutations => {
+		const observer = new MutationObserver(_mutations => {
 			if (htmlElement.hasAttribute('href')) {
 				observer.disconnect();
 				const parsedURL = new URL(htmlElement.href);
 				resolve({id: id, imgurl: parsedURL.searchParams.get('imgurl')});
 			}
 		});
-		observer.observe(htmlElement, {attributes: true});
+		observer.observe(htmlElement, {attributeFilter: ['href']});
 	});
 }
 
