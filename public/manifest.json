@@ -2,19 +2,19 @@
 	"manifest_version": 3,
 	"name": "Sketchy",
 	"version": "0.1",
-  "description": "Slideshow using Google Images",
+	"description": "Slideshow using Google Images",
 	"homepage_url": "https://github.com/ktoshima/sketchy",
 	"action": {
 		"default_popup": "index.html",
 		"default_title": "Open Sketchy"
 	},
-  "host_permissions": [
-    "https://*.google.com/search?*"
-  ],
-  "permissions": [
-    "scripting",
-    "activeTab"
-  ],
+	"host_permissions": [
+		"https://www.google.com/search?*"
+	],
+	"permissions": [
+		"activeTab",
+		"scripting"
+	],
 	"background": {
 		"scripts": [],
 		"persistent": false,

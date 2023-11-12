@@ -53,6 +53,16 @@ form button {
   cursor: pointer;
 }
 
+button {
+  background: #8d99ae;;
+  border: 0;
+  color: var(--primary);
+  padding: 15px;
+  font-size: 12pt;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 div.error {
   padding: 10px;
   background: #ffefef;
