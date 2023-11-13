@@ -11,7 +11,6 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <Popup />
         <div className="pages">
           <Routes>
             <Route

@@ -1,8 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Popup = () => {
 	const [tabURL, setTabURL] = useState(null);
 	const [invalidURL, setInvalidURL] = useState(false);
+	const navigate = useNavigate();
+
+	const handleStart = (e) => {
+		e.preventDefault();
+		navigate("/input-form");
+	}
 
 	browser.tabs.query({active:true, currentWindow:true})
 		.then((tabArray) => {
@@ -20,10 +27,14 @@ const Popup = () => {
 			{ tabURL && (
 				<>
 					<div className="start">Query: { tabURL.searchParams.get('q') } </div>
-					<button>Start</button>
+					<button onClick={handleStart}>Start</button>
 				</>
 			) }
-			{ invalidURL && ( <div className="error">Not Google Image Search tab</div> ) }
+			{ invalidURL && (
+				<>
+					<div className="error">Not Google Image Search tab</div>
+				</>
+			) }
 		</>
 	)
 }
