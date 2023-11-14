@@ -32,13 +32,13 @@ const getImgUrlObj = (id, htmlElement, timeout) => {
 		});
 }
 
-const collection = document.getElementsByClassName("islib");
-console.log(collection.length);
+console.log('executing autoclick');
+
+const tmbHtmlCollection = document.getElementsByClassName("islib");
 const htmlArray = [];
 let counter = 0
-for (let key in collection) {
-	htmlArray.push(collection[key]);
-	console.log(htmlArray);
+for (let key in tmbHtmlCollection) {
+	htmlArray.push(tmbHtmlCollection[key]);
 	++counter;
 	if (counter === 10) break;
 }

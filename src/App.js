@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // pages and components
 import InputForm from './pages/InputForm';
 import Session from './pages/Session';
-import Popup from './pages/Popup';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -15,10 +14,6 @@ function App() {
           <Routes>
             <Route
               exact path='/'
-              element={ <Popup /> }
-            />
-            <Route
-              path='/input-form'
               element={ <InputForm /> }
             />
             <Route

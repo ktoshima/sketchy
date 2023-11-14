@@ -11,9 +11,12 @@
 		"activeTab",
 		"scripting"
 	],
+	"action": {
+		"default_title": "Open sketchy",
+		"default_popup": "popup.html"
+	},
 	"background": {
-		"scripts": ["./src/background.js"],
-		"persistent": false,
+		"scripts": ["background.js"],
 		"type": "module"
 	}
 }
