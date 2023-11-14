@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -22,10 +23,19 @@ module.exports = {
 						presets: ['@babel/preset-env', '@babel/preset-react']
 					}
 				}
-			}
+			},
+			{
+				test: /\.css$/i,
+				use: [MiniCssExtractPlugin.loader, "css-loader"],
+			},
 		]
 	},
 	plugins: [
-		// new CopyPlugin([{from: './public/manifest.json', to:'manifest.json'}])
+		new CopyPlugin({
+			patterns: [
+				{from: 'public'}
+			]
+		}),
+		new MiniCssExtractPlugin()
 	],
 };
