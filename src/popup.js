@@ -15,7 +15,7 @@ const Popup = () => {
 			target: {tabId: tabId},
 			files: ['./createGallery.js']
 		}).then((result) => {
-			console.log(result.result);
+			console.log(result);
 			setIsCreatingGallery(false);
 		})
 

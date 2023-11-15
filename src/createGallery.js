@@ -11,7 +11,6 @@ const clickPromise = (htmlElement, timeout) => {
 const imgUrlPromise = (id, htmlElement) => {
 	return new Promise((resolve) => {
 		if (htmlElement.hasAttribute('href')) {
-			console.log('mutation unneccesary');
 			const parsedURL = new URL(htmlElement.href);
 			resolve({id: id, imgurl: parsedURL.searchParams.get('imgurl')});
 		}
@@ -19,7 +18,6 @@ const imgUrlPromise = (id, htmlElement) => {
 			if (htmlElement.hasAttribute('href')) {
 				observer.disconnect();
 				const parsedURL = new URL(htmlElement.href);
-				console.log("mutation observed");
 				resolve({id: id, imgurl: parsedURL.searchParams.get('imgurl')});
 			}
 		});
