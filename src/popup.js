@@ -7,14 +7,18 @@ const Popup = () => {
 	const [tabURL, setTabURL] = useState(null);
 	const [tabId, setTabId] = useState(null);
 	const [invalidURL, setInvalidURL] = useState(false);
+	const [isCreatingGallery, setIsCreatingGallery] = useState(false)
 
-	const handleStart = (tabId) => {
-		console.log("clicked");
+	const createGallery = () => {
+		setIsCreatingGallery(true);
 		browser.scripting.executeScript({
 			target: {tabId: tabId},
-			files: ['autoclick.js'],
-			injectImmediately: false
+			files: ['./createGallery.js']
+		}).then((result) => {
+			console.log(result.result);
+			setIsCreatingGallery(false);
 		})
+
 	}
 
 	browser.tabs.query({active: true, currentWindow: true})
@@ -34,7 +38,7 @@ const Popup = () => {
 			{ tabURL && (
 				<>
 					<div className="start">Query: { tabURL.searchParams.get('q') } </div>
-					<button onClick={() => handleStart(tabId)}>Start</button>
+					<button disabled={isCreatingGallery} onClick={() => createGallery()}>Start</button>
 				</>
 			) }
 			{ invalidURL && (

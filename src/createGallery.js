@@ -11,6 +11,7 @@ const clickPromise = (htmlElement, timeout) => {
 const imgUrlPromise = (id, htmlElement) => {
 	return new Promise((resolve) => {
 		if (htmlElement.hasAttribute('href')) {
+			console.log('mutation unneccesary');
 			const parsedURL = new URL(htmlElement.href);
 			resolve({id: id, imgurl: parsedURL.searchParams.get('imgurl')});
 		}
@@ -18,6 +19,7 @@ const imgUrlPromise = (id, htmlElement) => {
 			if (htmlElement.hasAttribute('href')) {
 				observer.disconnect();
 				const parsedURL = new URL(htmlElement.href);
+				console.log("mutation observed");
 				resolve({id: id, imgurl: parsedURL.searchParams.get('imgurl')});
 			}
 		});
@@ -32,8 +34,6 @@ const getImgUrlObj = (id, htmlElement, timeout) => {
 		});
 }
 
-console.log('executing autoclick');
-
 const tmbHtmlCollection = document.getElementsByClassName("islib");
 const htmlArray = [];
 let counter = 0
@@ -44,7 +44,4 @@ for (let key in tmbHtmlCollection) {
 }
 
 Promise.all(htmlArray.map((value, index) => getImgUrlObj(index, value, index*1000) ))
-	.then((array) => { console.log(array); });
-
-
-// https://www.google.com/search?q=horse&tbm=isch
+	.then(array => array);

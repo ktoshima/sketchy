@@ -8,7 +8,7 @@ module.exports = {
 		popup: './src/popup.js',
 		index: './src/index.js',
 		background: './src/background.js',
-		createImgList: './src/createImgList.js',
+		createGallery: './src/createGallery.js',
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
