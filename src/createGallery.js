@@ -1,4 +1,3 @@
-
 const clickPromise = (htmlElement, timeout) => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
@@ -32,19 +31,20 @@ const getImgUrlObj = (id, htmlElement, timeout) => {
 		});
 }
 
-const collection = document.getElementsByClassName("islib");
-console.log(collection.length);
+const tmbHtmlCollection = document.getElementsByClassName("islib");
 const htmlArray = [];
 let counter = 0
-for (let key in collection) {
-	htmlArray.push(collection[key]);
-	console.log(htmlArray);
+for (let key in tmbHtmlCollection) {
+	htmlArray.push(tmbHtmlCollection[key]);
 	++counter;
 	if (counter === 10) break;
 }
 
-Promise.all(htmlArray.map((value, index) => getImgUrlObj(index, value, index*1000) ))
-	.then((array) => { console.log(array); });
-
-
-// https://www.google.com/search?q=horse&tbm=isch
+Promise.all(htmlArray.map((value, index) => getImgUrlObj(index, value, index*1000)))
+	.then((gallery) => {
+		console.log('sending image gallery: ', gallery);
+		browser.runtime.sendMessage({
+			type: "gallery_ready",
+			gallery: gallery
+		});
+	});

@@ -1,14 +1,7 @@
-browser.action.onClicked.addListener((tab) => {
-	console.log(tab.url);
-	const tabURL = new URL(tab.url);
-	if (tabURL.searchParams.get('tbm') === 'isch') {
-		console.log('google image search url');
-		browser.scripting.executeScript({
-			target: {
-				tabId: tab.id,
-			},
-			files: ["content_script.js"],
-			injectImmediately: false
+browser.runtime.onMessage.addListener((data) => {
+	if (data.type === "open_session") {
+		let creating = browser.tabs.create({
+			"url": browser.runtime.getURL("./index.html")
 		});
 	}
-});
+})
