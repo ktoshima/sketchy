@@ -3,7 +3,7 @@
   --error: #ef233c;
 }
 
-#react-root {
+body {
   background-color: #30384b;
   color: #eee;
   margin: 0;
@@ -12,10 +12,8 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 100%;
-  min-height: 100%;
-  position: fixed;
-  z-index: 1001;
+  min-width: 400px;
+  min-height: 200px;
 
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
