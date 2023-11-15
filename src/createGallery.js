@@ -1,4 +1,3 @@
-
 const clickPromise = (htmlElement, timeout) => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
@@ -41,5 +40,11 @@ for (let key in tmbHtmlCollection) {
 	if (counter === 10) break;
 }
 
-Promise.all(htmlArray.map((value, index) => getImgUrlObj(index, value, index*1000) ))
-	.then(array => array);
+Promise.all(htmlArray.map((value, index) => getImgUrlObj(index, value, index*1000)))
+	.then((gallery) => {
+		console.log('sending image gallery: ', gallery);
+		browser.runtime.sendMessage({
+			type: "gallery_ready",
+			gallery: gallery
+		});
+	});
