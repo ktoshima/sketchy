@@ -23,7 +23,7 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "build": "webpack --mode production --config webpack.config.js"
+    "build": "rm -r dist/; webpack --mode production --config webpack.config.js"
   },
   "eslintConfig": {
     "extends": [
