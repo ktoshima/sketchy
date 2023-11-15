@@ -33,12 +33,14 @@ const Popup = () => {
 	browser.tabs.query({active: true, currentWindow: true})
 		.then((tabArray) => {
 			const currentTab = tabArray[0];
-			const currentURL = new URL(currentTab.url);
-			if (currentURL.searchParams.get('tbm') === 'isch') {
-				setTabURL(currentURL);
-				setTabId(currentTab.id);
-			} else {
-				setInvalidURL(true);
+			if (currentTab.url){
+				const currentURL = new URL(currentTab.url);
+				if (currentURL.searchParams.get('tbm') === 'isch') {
+					setTabURL(currentURL);
+					setTabId(currentTab.id);
+				} else {
+					setInvalidURL(true);
+				}
 			}
 		})
 
