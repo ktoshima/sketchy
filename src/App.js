@@ -13,7 +13,7 @@ function App() {
         <div className="pages">
           <Routes>
             <Route
-              exact path='/'
+              exact path='/index.html'
               element={ <InputForm /> }
             />
             <Route
