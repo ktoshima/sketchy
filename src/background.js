@@ -1,7 +1,8 @@
 browser.runtime.onMessage.addListener((data) => {
 	if (data.type === "open_session") {
-		let creating = browser.tabs.create({
+		browser.tabs.create({
 			"url": browser.runtime.getURL("./index.html")
 		});
+		return Promise.resolve("session opened");
 	}
 })

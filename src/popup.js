@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { SessionContextProvider } from './context/SessionContext';
 // import './popup.css';
 
 const Popup = () => {
@@ -15,14 +16,27 @@ const Popup = () => {
 
 	const createGallery = () => {
 		setIsCreatingGallery(true);
+		// initiate gallery creation by running createGallery.js
 		browser.scripting.executeScript({
 			target: {tabId: tabId},
 			files: ['./createGallery.js']
 		});
 	}
 
+	const galleryListener = (data) => {
+		if (data.type === "gallery_ready") {
+			return new Promise((resolve) => {
+				console.log('gallery received');
+				setGallery(data.gallery);
+				setIsCreatingGallery(false);
+				resolve("gallery set done");
+			});
+		}
+		return false;
+	}
+
 	const openSession = () => {
-		// send background.js message to open index.html
+		// send background.js a message to open index.html
 		browser.runtime.sendMessage({
 			type: "open_session",
 			gallery: gallery
@@ -30,10 +44,13 @@ const Popup = () => {
 		return null;
 	}
 
+	// receive message once createGallery.js finished running
+	browser.runtime.onMessage.addListener(galleryListener);
+
 	browser.tabs.query({active: true, currentWindow: true})
 		.then((tabArray) => {
 			const currentTab = tabArray[0];
-			if (currentTab.url){
+			if (currentTab.url) {
 				const currentURL = new URL(currentTab.url);
 				if (currentURL.searchParams.get('tbm') === 'isch') {
 					setTabURL(currentURL);
@@ -41,22 +58,18 @@ const Popup = () => {
 				} else {
 					setInvalidURL(true);
 				}
+			} else {
+				setInvalidURL(false);
 			}
 		})
 
-	browser.runtime.onMessage.addListener((data) => {
-		if (data.type === "gallery_ready") {
-			setGallery(data.gallery);
-			setIsCreatingGallery(false);
-		}
-	})
 
 	return (
 		<>
 			{ tabURL && (
 				<>
 					<div className="query">Query: { tabURL.searchParams.get('q') } </div>
-					<button disabled={isCreatingGallery} onClick={() => {createGallery();}}>Create Gallery</button>
+					<button disabled={isCreatingGallery} onClick={() => {createGallery();}}>{!gallery.length ? "Create Gallery" : "Recreate Gallery"}</button>
 					<div className="gallery">Gallery length: { gallery.length } </div>
 					<button disabled={!gallery.length} onClick={() => {openSession();}}>Open session</button>
 				</>
@@ -73,6 +86,10 @@ const Popup = () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<Popup />
+		<SessionContextProvider>
+			<Popup />
+		</SessionContextProvider>
 	</React.StrictMode>
 )
+
+// google.com/search?q=cat&tbm=isch
