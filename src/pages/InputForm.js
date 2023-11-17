@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // import context
@@ -6,13 +6,34 @@ import { useSessionContext } from "../hooks/useSessionContext";
 
 
 const InputForm = () => {
-	const { sketchNum, setSketchNum, sketchTime, setSketchTime, interval, setInterval } = useSessionContext();
+	const {
+		gallery, galleryDispatch,
+		sketchNum, setSketchNum,
+		sketchTime, setSketchTime,
+		interval, setInterval
+	} = useSessionContext();
 
 	const [minute, setMinute] = useState();
 	const [second, setSecond] = useState(sketchTime);
 	const [emptyFields, setEmptyFields] = useState([]);
 	const [error, setError] = useState([]);
 	const navigate = useNavigate();
+
+	const requestGallery = () => {
+		browser.runtime.sendMessage({
+			type: "request_gallery"
+		}).then((res) => {
+			galleryDispatch({type: 'SET_GALLERY', payload: res.gallery});
+		})
+	}
+
+	useEffect(() => {
+		requestGallery();
+	}, [])
+
+	useEffect(() => {
+		console.log("rendered");
+	})
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -42,6 +63,7 @@ const InputForm = () => {
 
 	return (
 		<form action="" className="form" onSubmit={handleSubmit}>
+			<h3>Number of images in gallery: {gallery ? gallery.length : 0}</h3>
 			<h3>Set Number of Sketch</h3>
 			<input
 				type="number"
