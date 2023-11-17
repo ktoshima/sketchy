@@ -25,7 +25,7 @@ function App() {
               path='/session'
               element={ <Session /> }
             />
-            </Routes>
+        </Routes>
         </div>
       </BrowserRouter>
     </div>
