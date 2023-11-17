@@ -9,7 +9,7 @@ const Session = () => {
 
 	return (
 		<>
-			<div>gallery: { gallery }</div>
+			<div>gallery: { JSON.stringify(gallery) }</div>
 			<div>sketchNum: { sketchNum }</div>
 			<div>sketchTime: { sketchTime }</div>
 			<div>interval: { interval }</div>
