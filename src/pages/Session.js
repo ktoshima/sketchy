@@ -2,13 +2,18 @@ import { useSessionContext } from "../hooks/useSessionContext";
 
 
 const Session = () => {
-	const { sketchNum, sketchTime, interval } = useSessionContext;
+	const { gallery, sketchNum, sketchTime, interval } = useSessionContext();
 
 
 
 
 	return (
-		<div>Canvas</div>
+		<>
+			<div>gallery: { gallery }</div>
+			<div>sketchNum: { sketchNum }</div>
+			<div>sketchTime: { sketchTime }</div>
+			<div>interval: { interval }</div>
+		</>
 	)
 };
 
