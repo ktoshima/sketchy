@@ -26,7 +26,6 @@ const Popup = () => {
 	const galleryListener = (data) => {
 		if (data.type === "gallery_ready") {
 			return new Promise((resolve) => {
-				console.log('gallery received');
 				setGallery(data.gallery);
 				setIsCreatingGallery(false);
 				resolve("gallery set done");

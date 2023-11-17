@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 // pages and components
 import InputForm from './pages/InputForm';
@@ -13,8 +14,12 @@ function App() {
         <div className="pages">
           <Routes>
             <Route
-              exact path='/index.html'
+              exact path='/'
               element={ <InputForm /> }
+            />
+            <Route
+              path='/index.html'
+              element={ <Navigate to="/" replace={true} /> }
             />
             <Route
               path='/session'
