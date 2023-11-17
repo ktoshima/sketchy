@@ -5,7 +5,7 @@
 			"type": "firefox",
 			"request": "launch",
 			"reAttach": true,
-			"name": "Launch add-on",
+			"name": "Launch extension",
 			"addonPath": "${workspaceFolder}/dist",
 			"preLaunchTask": "npm: build"
 		}

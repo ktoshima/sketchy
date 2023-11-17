@@ -2,15 +2,15 @@ import { createContext, useState, useReducer } from "react";
 
 export const SessionContext = createContext();
 
-export const imageListReducer = ( state, action ) => {
+export const galleryReducer = ( state, action ) => {
 	switch ( action.type ) {
-		case 'SET_IMAGELIST':
+		case 'SET_GALLERY':
 			return {
-				image_list: action.payload
+				gallery: action.payload
 			};
 		case 'DELETE_IMAGE':
 			return {
-				image_list: state.image_list.filter((image) => image.id !== action.payload.id)
+				gallery: state.gallery.filter((image) => image.id !== action.payload.id)
 			};
 		default:
 			return state;
@@ -18,8 +18,8 @@ export const imageListReducer = ( state, action ) => {
 };
 
 export const SessionContextProvider = ({ children }) => {
-	const [state, imageListDispatch] = useReducer(imageListReducer, {
-		image_list: null
+	const [state, galleryDispatch] = useReducer(galleryReducer, {
+		gallery: null
 	});
 	const [sketchNum, setSketchNum] = useState(10);
 	const [sketchTime, setSketchTime] = useState(30);
@@ -28,12 +28,13 @@ export const SessionContextProvider = ({ children }) => {
 		<SessionContext.Provider
 			value={
 				{
-					...state, imageListDispatch,
+					...state, galleryDispatch,
 					sketchNum, setSketchNum,
 					sketchTime, setSketchTime,
 					interval, setInterval
 				}
-			}>
+			}
+		>
 			{ children }
 		</SessionContext.Provider>
 	)

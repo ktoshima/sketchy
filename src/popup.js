@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { SessionContextProvider } from './context/SessionContext';
 // import './popup.css';
 
 const Popup = () => {
@@ -8,11 +7,32 @@ const Popup = () => {
 	const [tabId, setTabId] = useState(null);
 	const [invalidURL, setInvalidURL] = useState(false);
 	const [isCreatingGallery, setIsCreatingGallery] = useState(false)
-	const [gallery, setGallery] = useState([]);
+	const [gallery, setGallery] = useState(null);
 
+	// check if rendering-loop occurring
 	useEffect(() => {
-		console.log('re-rendered');
-	}, [isCreatingGallery]);
+		console.log('rendered');
+	});
+
+	// run only once initialized
+	useEffect(() => {
+		// receive message once createGallery.js finished running
+		browser.runtime.onMessage.addListener(galleryListener);
+		// get current tab id and URL, decide if URL is google image search
+		browser.tabs.query({active: true, currentWindow: true})
+			.then((tabArray) => {
+				const currentTab = tabArray[0];
+				if (currentTab.url) {
+					const currentURL = new URL(currentTab.url);
+					if (currentURL.searchParams.get('tbm') === 'isch') {
+						setTabURL(currentURL);
+						setTabId(currentTab.id);
+					} else {
+						setInvalidURL(true);
+					}
+				}
+			});
+	}, []);
 
 	const createGallery = () => {
 		setIsCreatingGallery(true);
@@ -25,11 +45,10 @@ const Popup = () => {
 
 	const galleryListener = (data) => {
 		if (data.type === "gallery_ready") {
-			return new Promise((resolve) => {
-				setGallery(data.gallery);
-				setIsCreatingGallery(false);
-				resolve("gallery set done");
-			});
+			console.log("gallery received");
+			setGallery(data.gallery);
+			setIsCreatingGallery(false);
+			return Promise.resolve("gallery set done");
 		}
 		return false;
 	}
@@ -39,28 +58,11 @@ const Popup = () => {
 		browser.runtime.sendMessage({
 			type: "open_session",
 			gallery: gallery
-		})
-		return null;
-	}
+		});
+		window.close();
+	};
 
-	// receive message once createGallery.js finished running
-	browser.runtime.onMessage.addListener(galleryListener);
 
-	browser.tabs.query({active: true, currentWindow: true})
-		.then((tabArray) => {
-			const currentTab = tabArray[0];
-			if (currentTab.url) {
-				const currentURL = new URL(currentTab.url);
-				if (currentURL.searchParams.get('tbm') === 'isch') {
-					setTabURL(currentURL);
-					setTabId(currentTab.id);
-				} else {
-					setInvalidURL(true);
-				}
-			} else {
-				setInvalidURL(false);
-			}
-		})
 
 
 	return (
@@ -68,9 +70,9 @@ const Popup = () => {
 			{ tabURL && (
 				<>
 					<div className="query">Query: { tabURL.searchParams.get('q') } </div>
-					<button disabled={isCreatingGallery} onClick={() => {createGallery();}}>{!gallery.length ? "Create Gallery" : "Recreate Gallery"}</button>
-					<div className="gallery">Gallery length: { gallery.length } </div>
-					<button disabled={!gallery.length} onClick={() => {openSession();}}>Open session</button>
+					<button disabled={isCreatingGallery} onClick={() => {createGallery();}}>{!gallery ? "Create Gallery" : "Recreate Gallery"}</button>
+					<div className="gallery">Gallery length: { (gallery && gallery.length) ? gallery.length : "empty" } </div>
+					<button disabled={!(gallery && gallery.length)} onClick={() => {openSession();}}>Open session</button>
 				</>
 			) }
 			{ invalidURL && (
@@ -79,15 +81,13 @@ const Popup = () => {
 				</>
 			) }
 		</>
-	)
-}
+	);
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<SessionContextProvider>
-			<Popup />
-		</SessionContextProvider>
+		<Popup />
 	</React.StrictMode>
 )
 

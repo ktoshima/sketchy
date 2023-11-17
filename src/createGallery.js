@@ -1,3 +1,6 @@
+const WAIT_TIME = 500;
+const GALLERY_LEN = 10;
+
 const clickPromise = (htmlElement, timeout) => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
@@ -37,10 +40,10 @@ let counter = 0
 for (let key in tmbHtmlCollection) {
 	htmlArray.push(tmbHtmlCollection[key]);
 	++counter;
-	if (counter === 10) break;
+	if (counter === GALLERY_LEN) break;
 }
 
-Promise.all(htmlArray.map((value, index) => getImgUrlObj(index, value, index*1000)))
+Promise.all(htmlArray.map((value, index) => getImgUrlObj(index, value, index*WAIT_TIME)))
 	.then((gallery) => {
 		console.log('sending image gallery: ', gallery);
 		browser.runtime.sendMessage({
