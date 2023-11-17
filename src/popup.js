@@ -10,9 +10,30 @@ const Popup = () => {
 	const [isCreatingGallery, setIsCreatingGallery] = useState(false)
 	const [gallery, setGallery] = useState([]);
 
+	// check if rendering-loop occurring
 	useEffect(() => {
 		console.log('re-rendered');
-	}, [isCreatingGallery]);
+	});
+
+	// run only once initialized
+	useEffect(() => {
+		// receive message once createGallery.js finished running
+		browser.runtime.onMessage.addListener(galleryListener);
+		// get current tab id and URL, decide if URL is google image search
+		browser.tabs.query({active: true, currentWindow: true})
+			.then((tabArray) => {
+				const currentTab = tabArray[0];
+				if (currentTab.url) {
+					const currentURL = new URL(currentTab.url);
+					if (currentURL.searchParams.get('tbm') === 'isch') {
+						setTabURL(currentURL);
+						setTabId(currentTab.id);
+					} else {
+						setInvalidURL(true);
+					}
+				}
+			});
+	}, []);
 
 	const createGallery = () => {
 		setIsCreatingGallery(true);
@@ -25,11 +46,10 @@ const Popup = () => {
 
 	const galleryListener = (data) => {
 		if (data.type === "gallery_ready") {
-			return new Promise((resolve) => {
-				setGallery(data.gallery);
-				setIsCreatingGallery(false);
-				resolve("gallery set done");
-			});
+			console.log("gallery received");
+			setGallery(data.gallery);
+			setIsCreatingGallery(false);
+			return Promise.resolve("gallery set done");
 		}
 		return false;
 	}
@@ -40,27 +60,10 @@ const Popup = () => {
 			type: "open_session",
 			gallery: gallery
 		})
-		return null;
+		window.close();
 	}
 
-	// receive message once createGallery.js finished running
-	browser.runtime.onMessage.addListener(galleryListener);
 
-	browser.tabs.query({active: true, currentWindow: true})
-		.then((tabArray) => {
-			const currentTab = tabArray[0];
-			if (currentTab.url) {
-				const currentURL = new URL(currentTab.url);
-				if (currentURL.searchParams.get('tbm') === 'isch') {
-					setTabURL(currentURL);
-					setTabId(currentTab.id);
-				} else {
-					setInvalidURL(true);
-				}
-			} else {
-				setInvalidURL(false);
-			}
-		})
 
 
 	return (
