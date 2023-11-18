@@ -11,6 +11,17 @@
 			"problemMatcher": [],
 			"label": "npm: build",
 			"detail": "react-scripts build"
+		},
+		{
+			"type": "npm",
+			"script": "run",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: run",
+			"detail": "react-scripts run"
 		}
 	]
 }
