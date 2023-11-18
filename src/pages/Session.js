@@ -1,6 +1,9 @@
 import { useSessionContext } from "../hooks/useSessionContext";
 
 
+import Timer from '../components/Timer';
+
+
 const Session = () => {
 	const { gallery, sketchNum, sketchTime, interval } = useSessionContext();
 
@@ -13,6 +16,7 @@ const Session = () => {
 			<div>sketchNum: { sketchNum }</div>
 			<div>sketchTime: { sketchTime }</div>
 			<div>interval: { interval }</div>
+			<Timer />
 		</>
 	)
 };
