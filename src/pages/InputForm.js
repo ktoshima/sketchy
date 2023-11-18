@@ -27,12 +27,14 @@ const InputForm = () => {
 		})
 	}
 
+	// request gallery when initialized
 	useEffect(() => {
 		requestGallery();
 	}, [])
 
+	// check render-roop
 	useEffect(() => {
-		console.log("rendered");
+		console.log("input form rendered");
 	})
 
 	const handleSubmit = (e) => {

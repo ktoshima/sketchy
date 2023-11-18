@@ -11,7 +11,7 @@ const Popup = () => {
 
 	// check if rendering-loop occurring
 	useEffect(() => {
-		console.log('rendered');
+		console.log('popup rendered');
 	});
 
 	// run only once initialized
