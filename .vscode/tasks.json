@@ -3,25 +3,25 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "build",
+			"script": "build:prod",
 			"group": {
 				"kind": "build",
-				"isDefault": true
+				"isDefault": false
 			},
 			"problemMatcher": [],
-			"label": "npm: build",
-			"detail": "react-scripts build"
+			"label": "npm: build:prod",
+			"detail": "react-scripts build:prod"
 		},
 		{
 			"type": "npm",
-			"script": "run",
+			"script": "build:dev",
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			},
 			"problemMatcher": [],
-			"label": "npm: run",
-			"detail": "react-scripts run"
+			"label": "npm: build:dev",
+			"detail": "react-scripts build:dev"
 		}
 	]
 }
