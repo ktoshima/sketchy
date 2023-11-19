@@ -1,5 +1,5 @@
 const WAIT_TIME = 500;
-const GALLERY_LEN = 10;
+const GALLERY_LEN = 5;
 
 const clickPromise = (htmlElement, timeout) => {
 	return new Promise((resolve) => {
