@@ -23,8 +23,8 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "run": "rm -r dist/; webpack --mode development --devtool inline-source-map --config webpack.config.js",
-    "build": "webpack --mode production --config webpack.config.js"
+    "build:dev": "rm -r dist/; webpack --mode development --devtool inline-source-map --config webpack.config.js",
+    "build:prod": "rm -r dist/; webpack --mode production --config webpack.config.js"
   },
   "eslintConfig": {
     "extends": [
