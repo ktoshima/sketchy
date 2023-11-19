@@ -13,20 +13,25 @@ export const useTimer = (
 ) => {
 	let counterID;
 	useEffect(() => {
-		if (isRunning) {
+		if (!counterID && isRunning) {
 			counterID = setInterval(() => {
 				setTimeRemaining(t => t-1);
 			}, 1000);
+			console.log("initiating", counterID);
 		}
 		return () => {
-			if (counterID) clearInterval(counterID);
+			console.log("terminating", counterID);
+			if (counterID) {
+				clearInterval(counterID);
+				counterID = null;
+			};
 		}
 	}, [isRunning]);
 
 	useEffect(() => {
 		if (!timeRemaining) {
-			setIsFinished(true);
 			setIsRunning(false);
+			setIsFinished(true);
 		}
 	}, [timeRemaining])
 
