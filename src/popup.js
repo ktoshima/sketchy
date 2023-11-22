@@ -10,9 +10,9 @@ const Popup = () => {
 	const [gallery, setGallery] = useState(null);
 
 	// check if rendering-loop occurring
-	useEffect(() => {
-		console.log('popup rendered');
-	});
+	// useEffect(() => {
+	// 	console.log('popup rendered');
+	// });
 
 	// run only once initialized
 	useEffect(() => {
@@ -45,7 +45,6 @@ const Popup = () => {
 
 	const galleryListener = (data) => {
 		if (data.type === "gallery_ready") {
-			console.log("gallery received");
 			setGallery(data.gallery);
 			setIsCreatingGallery(false);
 			return Promise.resolve("gallery set done");
