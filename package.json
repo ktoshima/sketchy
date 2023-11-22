@@ -15,6 +15,7 @@
     "css-loader": "^6.8.1",
     "eslint": "^8.53.0",
     "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
@@ -23,7 +24,8 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "build": "rm -r dist/; webpack --mode production --config webpack.config.js"
+    "build:dev": "rm -r dist/; webpack --mode development --devtool inline-source-map --config webpack.config.js",
+    "build:prod": "rm -r dist/; webpack --mode production --config webpack.config.js"
   },
   "eslintConfig": {
     "extends": [

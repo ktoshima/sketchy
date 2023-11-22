@@ -8,6 +8,7 @@ import { useSessionContext } from "../hooks/useSessionContext";
 const InputForm = () => {
 	const {
 		gallery, galleryDispatch,
+		queueDispatch,
 		sketchNum, setSketchNum,
 		sketchTime, setSketchTime,
 		interval, setInterval
@@ -16,24 +17,28 @@ const InputForm = () => {
 	const [minute, setMinute] = useState();
 	const [second, setSecond] = useState(sketchTime);
 	const [emptyFields, setEmptyFields] = useState([]);
+	const [shuffleQueue, setShuffleQueue] = useState(false);
 	const [error, setError] = useState([]);
 	const navigate = useNavigate();
 
-	const requestGallery = () => {
-		browser.runtime.sendMessage({
-			type: "request_gallery"
-		}).then((res) => {
-			galleryDispatch({type: 'SET_GALLERY', payload: res.gallery});
-		})
-	}
 
+
+	// request gallery when initialized
 	useEffect(() => {
+		const requestGallery = () => {
+			browser.runtime.sendMessage({
+				type: "request_gallery"
+			}).then((res) => {
+				galleryDispatch({type: 'SET_GALLERY', payload: res.gallery});
+			})
+		}
 		requestGallery();
-	}, [])
+	}, [galleryDispatch])
 
-	useEffect(() => {
-		console.log("rendered");
-	})
+	// check render-roop
+	// useEffect(() => {
+	// 	console.log("input form rendered");
+	// })
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -56,6 +61,11 @@ const InputForm = () => {
 			setEmptyFields([]);
 			setError([]);
 			setSketchTime(60 * (minute ? minute : 0) + (second ? second : 0));
+			if (shuffleQueue) {
+				queueDispatch({type: 'SHUFFLE', payload: Object.keys(gallery).length})
+			} else {
+				queueDispatch({type: 'ORDERED', payload: Object.keys(gallery).length})
+			}
 			navigate("/session");
 		}
 	};
@@ -102,6 +112,11 @@ const InputForm = () => {
 				className={emptyFields.includes('interval') ? 'error' : ''}
 			/>
 			<label htmlFor="">s</label>
+			<h3>Shuffle</h3>
+			<input
+				type="checkbox"
+				onChange={(e) => setShuffleQueue(e.target.checked)}
+			/>
 
 			<button>Start</button>
 			{ Boolean(error.length) && error.map((e) =>(<div className="error"> { e } </div>)) }
