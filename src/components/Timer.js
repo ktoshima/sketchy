@@ -12,10 +12,6 @@ const Timer = ({ countTime }) => {
 	const [timeRemaining, setTimeRemaining] = useState(countTime);
 	const [isRunning, setIsRunning] = useState(false);
 
-	// useEffect(() => {
-	// 	console.log('timer rendered');
-	// });
-
 	useEffect(() => {
 		setTimeRemaining(countTime);
 	}, [countTime])

@@ -1,8 +1,8 @@
+import { useEffect, useRef, useState } from "react";
+
 import { useSessionContext } from "../hooks/useSessionContext";
 
-
 import Timer from '../components/Timer';
-import { useEffect, useRef, useState } from "react";
 
 
 const Session = () => {
@@ -16,10 +16,6 @@ const Session = () => {
 	const queuePos = useRef(0);
 	const [imgUrl, setImgUrl] = useState(null);
 	const [countTime, setCountTime] = useState(null);
-
-	useEffect(() => {
-		console.log("session rendered");
-	});
 
 	useEffect(() => {
 		if (isFinished) {
