@@ -2,29 +2,31 @@ import { useEffect, useState } from "react"
 import { useTimer } from "../hooks/useTimer"
 import { useSessionContext } from "../hooks/useSessionContext"
 
+const Timer = ({ countTime }) => {
 
+	const {
+		isFinished,
+		setIsFinished
+	} = useSessionContext();
 
-const Timer = () => {
-
-	const { sketchTime, interval } = useSessionContext();
-
-	const [timeRemaining, setTimeRemaining] = useState(interval);
+	const [timeRemaining, setTimeRemaining] = useState(countTime);
 	const [isRunning, setIsRunning] = useState(false);
-	const [isFinished, setIsFinished] = useState(false);
+
+	// useEffect(() => {
+	// 	console.log('timer rendered');
+	// });
 
 	useEffect(() => {
-		console.log('timer rendered');
-	})
-
-	useEffect(() => {
-		setTimeRemaining(sketchTime);
-	}, [])
+		setTimeRemaining(countTime);
+	}, [countTime])
 
 	useTimer(
-		sketchTime, interval,
-		timeRemaining, setTimeRemaining,
-		isRunning, setIsRunning,
-		isFinished, setIsFinished
+		timeRemaining,
+		setTimeRemaining,
+		isRunning,
+		setIsRunning,
+		isFinished,
+		setIsFinished
 	);
 
 	const toggleRunning = () => {
@@ -33,8 +35,8 @@ const Timer = () => {
 
 	return (
 		<>
-			<div>{ timeRemaining }</div>
-			<button onClick={() => toggleRunning()}>{isRunning ? 'pause' : 'start'}</button>
+			<div>{ String(Math.floor(timeRemaining/60)).padStart(2, '0') }:{ String(timeRemaining%60).padStart(2, '0') }</div>
+			<button disabled={timeRemaining<=0} onClick={() => toggleRunning()}>{isRunning ? 'pause' : 'start'}</button>
 		</>
 	)
 }

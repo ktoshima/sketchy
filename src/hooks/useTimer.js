@@ -1,9 +1,7 @@
-import { useEffect } from "react"
+import { useRef, useEffect } from "react"
 
 
 export const useTimer = (
-	sketchTime,
-	interval,
 	timeRemaining,
 	setTimeRemaining,
 	isRunning,
@@ -11,29 +9,33 @@ export const useTimer = (
 	isFinished,
 	setIsFinished
 ) => {
-	let counterID;
+	const intervalRef = useRef(null);
 	useEffect(() => {
-		if (!counterID && isRunning) {
-			counterID = setInterval(() => {
+		if (!intervalRef.current && isRunning) {
+			intervalRef.current = setInterval(() => {
 				setTimeRemaining(t => t-1);
 			}, 1000);
-			console.log("initiating", counterID);
 		}
 		return () => {
-			console.log("terminating", counterID);
-			if (counterID) {
-				clearInterval(counterID);
-				counterID = null;
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current);
+				intervalRef.current = null;
 			};
-		}
-	}, [isRunning]);
+		};
+	}, [isRunning, setTimeRemaining]);
 
 	useEffect(() => {
-		if (!timeRemaining) {
+		if (Number.isInteger(timeRemaining) && timeRemaining <= 0) {
 			setIsRunning(false);
 			setIsFinished(true);
 		}
-	}, [timeRemaining])
+	}, [timeRemaining, setIsRunning, setIsFinished]);
+
+	useEffect(() => {
+		if (!isFinished) {
+			setIsRunning(true);
+		}
+	}, [isFinished, setIsRunning]);
 
 
 }
