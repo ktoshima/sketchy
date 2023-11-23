@@ -23,10 +23,6 @@ export const galleryReducer = ( state, action ) => {
 			return {
 				gallery: action.payload
 			};
-		case 'DELETE_IMAGE':
-			return {
-				gallery: state.gallery.filter((image) => image.id !== action.payload.id)
-			};
 		default:
 			return state;
 	}
