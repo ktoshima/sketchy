@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useSessionContext } from "../hooks/useSessionContext";
 
+import Viewer from "../components/Viewer";
 import Timer from '../components/Timer';
 
 
@@ -14,7 +15,7 @@ const Session = () => {
 		interval
 	} = useSessionContext();
 	const queuePos = useRef(0);
-	const [imgUrl, setImgUrl] = useState(null);
+	const [viewObject, setViewObject] = useState(null);
 	const [countTime, setCountTime] = useState(null);
 
 	useEffect(() => {
@@ -22,31 +23,32 @@ const Session = () => {
 			queuePos.current = queuePos.current + 1
 			if (queuePos.current === queue.length) {
 				// TODO: last stage, display final screen?
-				console.log('last page');
+				setViewObject({type: 'interval', message: 'Finished! You can close this tab.'})
 			} else if (Number.isInteger(queue[queuePos.current])) {
 				// queue[queuePos] is id for image
-				console.log('sketching');
-				setImgUrl(gallery[queue[queuePos.current]]);
+				setViewObject({type: 'drawing', img: gallery[queue[queuePos.current]]});
 				setCountTime(sketchTime);
 				setIsFinished(false);
 			} else {
 				// queue[queuePos] is null, thus interval
-				console.log('interval');
-				setImgUrl(null);
+				setViewObject({type: 'interval', message: 'interval'});
 				setCountTime(interval);
 				setIsFinished(false);
 			}
 		} else if (queuePos.current === 0) {
-			setImgUrl(null);
+			setViewObject({type: 'interval', message: 'Get ready'});
 			setCountTime(5);
 			setIsFinished(false);
 		}
+	// gallery, queue, sketchTime, and interval will not change
+	// setIsFinished and setCountTime are useState function that will not change
+	// they're in the dependencies list to avoid eslint warnings
 	}, [isFinished, setIsFinished, sketchTime, interval, setCountTime, gallery, queue])
 
 
 	return (
 		<>
-			<div>gallery: {imgUrl ? JSON.stringify(imgUrl) : "" }</div>
+			<Viewer viewObject={viewObject} />
 			<Timer countTime={countTime}  />
 		</>
 	)

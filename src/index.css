@@ -73,4 +73,12 @@ body {
   border: 1px solid var(--error);
   }
 
+  img {
+    max-height:500px;
+    max-width:500px;
+    height:auto;
+    width:auto;
+    margin:0 auto;
+  }
+
 }
