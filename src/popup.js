@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
 
 // font import for material ui
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import CssBaseline from '@mui/material/CssBaseline';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button'
+import { green } from '@mui/material/colors';
+import Box from '@mui/material/Box';
 
 const Popup = () => {
 	const [tabURL, setTabURL] = useState(null);
@@ -74,9 +81,16 @@ const Popup = () => {
 			{ tabURL && (
 				<>
 					<div className="query">Query: { tabURL.searchParams.get('q') } </div>
-					<button disabled={isCreatingGallery} onClick={() => {createGallery();}}>{!gallery ? "Create Gallery" : "Recreate Gallery"}</button>
+					<Box sx={{ display: 'flex' }}>
+						<Button variant="contained" disabled={isCreatingGallery} onClick={() => {createGallery();}}>
+							{!gallery ? "Create Gallery" : "Recreate Gallery"}
+						</Button>
+						{ isCreatingGallery && <CircularProgress /> }
+					</Box>
 					<div className="gallery">Gallery length: { (gallery && gallery.length) ? gallery.length : "empty" } </div>
-					<button disabled={!(gallery && gallery.length)} onClick={() => {openSession();}}>Open session</button>
+					<Button variant="contained" disabled={!(gallery && gallery.length)} onClick={() => {openSession();}}>
+						Open Session
+					</Button>
 				</>
 			) }
 			{ invalidURL && (
@@ -91,7 +105,10 @@ const Popup = () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<Popup />
+		<ThemeProvider theme={theme}>
+			<CssBaseline enableColorScheme />
+			<Popup />
+		</ThemeProvider>
 	</React.StrictMode>
 )
 

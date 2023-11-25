@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -35,9 +35,13 @@ module.exports = {
 				exclude: /node_modules/,
 			},
 			{
-				test: /\.css$/,
-				use: [MiniCssExtractPlugin.loader, "css-loader"],
-				exclude: /node_modules/,
+				test: /\.(sass|scss|css)$/,
+				use: [
+					// MiniCssExtractPlugin.loader,
+					"style-loader",
+					"css-loader",
+					"sass-loader",
+				],
 			},
 		]
 	},
@@ -47,7 +51,7 @@ module.exports = {
 				{from: './src/manifest.json', to: 'manifest.json'}
 			]
 		}),
-		new MiniCssExtractPlugin(),
+		// new MiniCssExtractPlugin(),
 		new HtmlWebpackPlugin({
 			template: './public/popup.html',
 			filename: 'popup.html',
