@@ -24,6 +24,8 @@ const Session = () => {
 			if (queuePos.current === queue.length) {
 				// TODO: last stage, display final screen?
 				setViewObject({type: 'interval', message: 'Finished! You can close this tab.'})
+				setCountTime(null);
+				setIsFinished(true);
 			} else if (Number.isInteger(queue[queuePos.current])) {
 				// queue[queuePos] is id for image
 				setViewObject({type: 'drawing', img: gallery[queue[queuePos.current]]});
@@ -45,11 +47,15 @@ const Session = () => {
 	// they're in the dependencies list to avoid eslint warnings
 	}, [isFinished, setIsFinished, sketchTime, interval, setCountTime, gallery, queue])
 
+	const skip = () => {
+		setIsFinished(true);
+	};
 
 	return (
 		<>
 			<Viewer viewObject={viewObject} />
-			<Timer countTime={countTime}  />
+			{ countTime && <Timer countTime={countTime} /> }
+			{ !isFinished && <button onClick={() => skip()}>Skip</button>}
 		</>
 	)
 };
