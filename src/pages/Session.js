@@ -36,7 +36,7 @@ const Session = () => {
 				setIsFinished(true);
 			} else if (Number.isInteger(queue[queuePos.current])) {
 				// queue[queuePos] is id for image
-				setViewObject({type: 'drawing', drawingNum: currentSketchNum.current+1, img: gallery[queue[queuePos.current]]});
+				setViewObject({type: 'drawing', drawingNum: currentSketchNum.current+1, outof: sketchNum, img: gallery[queue[queuePos.current]]});
 				setCountTime(sketchTime);
 				setIsFinished(false);
 			} else {

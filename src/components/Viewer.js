@@ -9,7 +9,7 @@ const Viewer = ({ viewObject }) => {
 			}
 			{viewObject && viewObject.type === 'drawing' &&
 				<>
-					<div> Drawing #{viewObject.drawingNum} </div>
+					<div> Drawing #{viewObject.drawingNum}/{viewObject.outof} </div>
 					<img src={viewObject.img.imgurl} alt="" max-width='1200px' max-height="400px"/>
 				</>
 			}
