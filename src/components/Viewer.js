@@ -8,7 +8,10 @@ const Viewer = ({ viewObject }) => {
 				<div> {viewObject.message} </div>
 			}
 			{viewObject && viewObject.type === 'drawing' &&
-				<img src={viewObject.img.imgurl} alt="" max-width='1200px' max-height="400px"/>
+				<>
+					<div> Drawing #{viewObject.drawingNum} </div>
+					<img src={viewObject.img.imgurl} alt="" max-width='1200px' max-height="400px"/>
+				</>
 			}
 		</>
 	)
