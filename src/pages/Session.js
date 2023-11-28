@@ -11,24 +11,32 @@ const Session = () => {
 		gallery,
 		queue,
 		isFinished, setIsFinished,
+		sketchNum,
 		sketchTime,
 		interval
 	} = useSessionContext();
 	const queuePos = useRef(0);
+	const currentSketchNum = useRef(0);
+	const isSkipped = useRef(false);
 	const [viewObject, setViewObject] = useState(null);
 	const [countTime, setCountTime] = useState(null);
 
 	useEffect(() => {
 		if (isFinished) {
-			queuePos.current = queuePos.current + 1
-			if (queuePos.current === queue.length) {
+			if (queue[queuePos.current] && !isSkipped.current) {
+				currentSketchNum.current += 1;
+			} else {
+				isSkipped.current = false;
+			}
+			queuePos.current = queuePos.current + 1;
+			if (currentSketchNum.current === sketchNum || queuePos.current === queue.length) {
 				// TODO: last stage, display final screen?
 				setViewObject({type: 'interval', message: 'Finished! You can close this tab.'})
 				setCountTime(null);
 				setIsFinished(true);
 			} else if (Number.isInteger(queue[queuePos.current])) {
 				// queue[queuePos] is id for image
-				setViewObject({type: 'drawing', img: gallery[queue[queuePos.current]]});
+				setViewObject({type: 'drawing', drawingNum: currentSketchNum.current+1, outof: sketchNum, img: gallery[queue[queuePos.current]]});
 				setCountTime(sketchTime);
 				setIsFinished(false);
 			} else {
@@ -42,12 +50,15 @@ const Session = () => {
 			setCountTime(5);
 			setIsFinished(false);
 		}
-	// gallery, queue, sketchTime, and interval will not change
+	// gallery, queue, sketchNum, sketchTime, and interval will not change
 	// setIsFinished and setCountTime are useState function that will not change
 	// they're in the dependencies list to avoid eslint warnings
-	}, [isFinished, setIsFinished, sketchTime, interval, setCountTime, gallery, queue])
+	}, [isFinished, setIsFinished, sketchNum, sketchTime, interval, setCountTime, gallery, queue])
 
 	const skip = () => {
+		if (queue[queuePos.current]) {
+			isSkipped.current = true;
+		}
 		setIsFinished(true);
 	};
 
