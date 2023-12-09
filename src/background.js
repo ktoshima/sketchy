@@ -6,8 +6,9 @@ browser.runtime.onMessage.addListener((message) => {
 		browser.tabs.create({
 			"url": browser.runtime.getURL("./index.html")
 		});
-		return true;
+		return Promise.resolve('Opened session');
 	} else if (message.type === "request_gallery") {
 		return Promise.resolve({ gallery: gallery });
 	}
+	return false;
 });

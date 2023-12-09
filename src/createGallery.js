@@ -1,6 +1,3 @@
-const WAIT_TIME = 100;
-const GALLERY_LEN = 5;
-
 const clickPromise = (htmlElement, timeout) => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
@@ -34,19 +31,33 @@ const getImgUrlObj = (id, htmlElement, timeout) => {
 		});
 }
 
-const tmbHtmlCollection = document.getElementsByClassName("islib");
-const htmlArray = [];
-let counter = 0
-for (let key in tmbHtmlCollection) {
-	htmlArray.push(tmbHtmlCollection[key]);
-	++counter;
-	if (counter === GALLERY_LEN) break;
+const createGallery = (maxGalleryLen, wait_time) => {
+	const tmbHtmlCollection = document.getElementsByClassName("islib");
+	const htmlArray = [];
+	let counter = 0
+	for (let key in tmbHtmlCollection) {
+		htmlArray.push(tmbHtmlCollection[key]);
+		++counter;
+		if (counter === maxGalleryLen) break;
+	}
+	return htmlArray.map((value, index) => getImgUrlObj(index, value, index*wait_time));
 }
 
-Promise.all(htmlArray.map((value, index) => getImgUrlObj(index, value, index*WAIT_TIME)))
-	.then((gallery) => {
-		browser.runtime.sendMessage({
-			type: "gallery_ready",
-			gallery: gallery
+const createGalleryListener = (message) => {
+	if (message.type === "create_gallery") {
+		const galleryPromises = createGallery(message.maxGalleryLen, 500);
+		return new Promise((resolve) => {
+			Promise.all(galleryPromises)
+				.then((gallery) => {
+					resolve({gallery: gallery});
+				});
 		});
-	});
+	}
+	return false;
+}
+
+// make sure listener is added to the page only once
+if (browser.runtime.onMessage.hasListener(createGalleryListener)) {
+} else {
+	browser.runtime.onMessage.addListener(createGalleryListener);
+}
