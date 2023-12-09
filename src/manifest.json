@@ -4,12 +4,8 @@
 	"version": "0.1",
 	"description": "Slideshow using Google Images",
 	"homepage_url": "https://github.com/ktoshima/sketchy",
-	"host_permissions": [
-		"https://www.google.com/search?*"
-	],
 	"permissions": [
-		"activeTab",
-		"scripting"
+		"activeTab"
 	],
 	"action": {
 		"default_title": "Open sketchy",
@@ -18,5 +14,11 @@
 	"background": {
 		"scripts": ["background.js"],
 		"type": "module"
-	}
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://www.google.com/search?*q=*&tbm=isch*"],
+			"js": ["createGallery.js"]
+		}
+	]
 }
