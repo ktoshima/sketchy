@@ -32,18 +32,18 @@ export const queueReducer = ( state, action ) => {
 	switch ( action.type ) {
 		case 'ORDERED':
 			return {
-				queue: Array.from(
-					{length: action.payload*2},
+				queue: action.interval ? Array.from(
+					{length: action.length*2},
 					(_, i) => i%2===0 ? null : (i-1)/2
-				)
+				) : [null, ...Array(action.length).keys()]
 			};
 		case 'SHUFFLE':
-			const idxRef = shuffleArray([...Array(action.payload).keys()])
+			const idxRef = shuffleArray([...Array(action.length).keys()])
 			return {
-				queue: Array.from(
-					{length: action.payload*2},
+				queue: action.interval ? Array.from(
+					{length: action.length*2},
 					(_, i) => i%2===0 ? null : idxRef[(i-1)/2]
-				)
+				) : [null, ...idxRef]
 			};
 		default:
 			return state;

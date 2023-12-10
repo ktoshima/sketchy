@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useTimer } from "../hooks/useTimer"
 import { useSessionContext } from "../hooks/useSessionContext"
 
-const Timer = ({ countTime }) => {
+const Timer = ({ queuePos, countTime }) => {
 
 	const {
 		isFinished,
@@ -12,10 +12,10 @@ const Timer = ({ countTime }) => {
 	const [timeRemaining, setTimeRemaining] = useState(countTime);
 	const [isRunning, setIsRunning] = useState(false);
 
+	// restart timer on queuePos change
 	useEffect(() => {
-		console.log('remaining time set at %d', countTime);
 		setTimeRemaining(countTime);
-	}, [countTime])
+	}, [countTime, queuePos])
 
 	useTimer(
 		timeRemaining,
