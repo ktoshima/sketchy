@@ -25,31 +25,41 @@ const Session = () => {
 		if (isFinished) {
 			if (queue[queuePos.current] && !isSkipped.current) {
 				currentSketchNum.current += 1;
-			} else {
-				isSkipped.current = false;
 			}
+			isSkipped.current = false;
 			queuePos.current = queuePos.current + 1;
 			if (currentSketchNum.current === sketchNum || queuePos.current === queue.length) {
-				// TODO: last stage, display final screen?
-				setViewObject({type: 'interval', message: 'Finished! You can close this tab.'})
+				// last stage, display final screen
+				setViewObject({
+					type: 'interval', message: 'Finished! You can close this tab.'
+				})
 				setCountTime(null);
 				setIsFinished(true);
 			} else if (Number.isInteger(queue[queuePos.current])) {
 				// queue[queuePos] is id for image
-				setViewObject({type: 'drawing', drawingNum: currentSketchNum.current+1, outof: sketchNum, img: gallery[queue[queuePos.current]]});
+				setViewObject({
+					type: 'drawing',
+					drawingNum: currentSketchNum.current+1, outof: sketchNum,
+					img: gallery[queue[queuePos.current]]
+				});
 				setCountTime(sketchTime);
 				setIsFinished(false);
 			} else {
 				// queue[queuePos] is null, thus interval
-				setViewObject({type: 'interval', message: 'interval'});
+				setViewObject({
+					type: 'interval', message: 'interval'
+				});
 				setCountTime(interval);
 				setIsFinished(false);
 			}
 		} else if (queuePos.current === 0) {
-			setViewObject({type: 'interval', message: 'Get ready'});
+			setViewObject({
+				type: 'interval', message: 'Get ready'
+			});
 			setCountTime(5);
 			setIsFinished(false);
 		}
+	// observe isFinished to update viewer and timer
 	// gallery, queue, sketchNum, sketchTime, and interval will not change
 	// setIsFinished and setCountTime are useState function that will not change
 	// they're in the dependencies list to avoid eslint warnings
@@ -65,7 +75,7 @@ const Session = () => {
 	return (
 		<>
 			<Viewer viewObject={viewObject} />
-			{ countTime && <Timer countTime={countTime} /> }
+			{ countTime && <Timer queuePos={queuePos.current} countTime={countTime} /> }
 			{ !isFinished && <button onClick={() => skip()}>Skip</button>}
 		</>
 	)
