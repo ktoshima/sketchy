@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -12,7 +11,7 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].js',
+		filename: '[name].bundle.js',
 	},
 	module: {
 		rules: [
@@ -32,22 +31,34 @@ module.exports = {
 			{
 				test: /\.html$/,
 				loader: 'html-loader',
-				exclude: /node_modules/,
 			},
 			{
-				test: /\.css$/,
-				use: [MiniCssExtractPlugin.loader, "css-loader"],
-				exclude: /node_modules/,
+				test: /\.(sass|scss|css)$/,
+				use: [
+					"style-loader",
+					"css-loader",
+					"sass-loader",
+				],
 			},
 		]
 	},
 	plugins: [
 		new CopyPlugin({
 			patterns: [
-				{from: './src/manifest.json', to: 'manifest.json'}
+				{
+					from: './src/manifest.json',
+					to: path.join(__dirname, 'dist')
+				},
+				{
+					from: './src/assets/styles/index.css',
+					to: path.join(__dirname, 'dist')
+				},
+				{
+					from: './src/assets/styles/popup.css',
+					to: path.join(__dirname, 'dist')
+				},
 			]
 		}),
-		new MiniCssExtractPlugin(),
 		new HtmlWebpackPlugin({
 			template: './public/popup.html',
 			filename: 'popup.html',
