@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import './assets/styles/popup.css';
 
 const Popup = () => {
 	const currentTab = useRef(null);
