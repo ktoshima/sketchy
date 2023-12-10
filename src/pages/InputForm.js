@@ -35,11 +35,6 @@ const InputForm = () => {
 		requestGallery();
 	}, [galleryDispatch])
 
-	// check render-roop
-	// useEffect(() => {
-	// 	console.log("input form rendered");
-	// })
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -62,9 +57,9 @@ const InputForm = () => {
 			setError([]);
 			setSketchTime(60 * (minute ? minute : 0) + (second ? second : 0));
 			if (shuffleQueue) {
-				queueDispatch({type: 'SHUFFLE', payload: Object.keys(gallery).length})
+				queueDispatch({type: 'SHUFFLE', interval: Boolean(interval), length: Object.keys(gallery).length})
 			} else {
-				queueDispatch({type: 'ORDERED', payload: Object.keys(gallery).length})
+				queueDispatch({type: 'ORDERED', interval: Boolean(interval), length: Object.keys(gallery).length})
 			}
 			navigate("/session");
 		}
