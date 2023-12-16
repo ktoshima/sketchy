@@ -1,0 +1,17 @@
+@use 'base';
+
+body {
+	width: 226px;
+	height: 220px;
+	background-color: base.$primary;
+	position: relative;
+
+	.container {
+		position: absolute;
+		margin: 82px 16px 0px;
+	}
+	.background-layer svg {
+		position: inherit;
+	}
+
+}
