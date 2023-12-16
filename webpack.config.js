@@ -4,10 +4,10 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	entry: {
-		popup: './src/popup.js',
-		index: './src/index.js',
-		background: './src/background.js',
-		createGallery: './src/createGallery.js',
+		popup: './src/pages/Popup/index.js',
+		app: './src/pages/App/index.js',
+		background: './src/background/background.js',
+		contentScript: './src/contentScript/contentScript.js',
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -60,15 +60,15 @@ module.exports = {
 			]
 		}),
 		new HtmlWebpackPlugin({
-			template: './public/popup.html',
+			template: './src/pages/Popup/index.html',
 			filename: 'popup.html',
 			chunks: ['popup'],
 			cache: false,
 		}),
 		new HtmlWebpackPlugin({
-			template: './public/index.html',
-			filename: 'index.html',
-			chunks: ['index'],
+			template: './src/pages/App/index.html',
+			filename: 'app.html',
+			chunks: ['app'],
 			cache: false,
 		}),
 	],

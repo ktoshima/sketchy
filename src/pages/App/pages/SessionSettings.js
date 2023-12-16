@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSessionContext } from "../hooks/useSessionContext";
 
 
-const InputForm = () => {
+const SessionSettings = () => {
 	const {
 		gallery, galleryDispatch,
 		queueDispatch,
@@ -120,4 +120,4 @@ const InputForm = () => {
 
 }
 
-export default InputForm;
+export default SessionSettings;

@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom/client';
-import './assets/styles/popup.css';
 
 const Popup = () => {
 	const currentTab = useRef(null);
@@ -83,11 +81,4 @@ const Popup = () => {
 	);
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-	<React.StrictMode>
-		<Popup />
-	</React.StrictMode>
-)
-
-// google.com/search?q=cat&tbm=isch
+export default Popup;
