@@ -18,7 +18,7 @@
 	"content_scripts": [
 		{
 			"matches": ["https://www.google.com/search?*q=*&tbm=isch*"],
-			"js": ["createGallery.bundle.js"]
+			"js": ["contentScript.bundle.js"]
 		}
 	]
 }
