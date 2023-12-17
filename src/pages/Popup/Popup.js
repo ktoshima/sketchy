@@ -30,11 +30,19 @@ const Popup = () => {
 		setIsCreatingGallery(true);
 		// initiate gallery creation by sending a message to content script
 		// sending message to content script is only supported through tabs.sendMessage
+		console.log(maxGalleryLen);
+		let sendMaxGalleryLen;
+		if (maxGalleryLen > 50) {
+			setMaxGalleryLen(50);
+			sendMaxGalleryLen = 50;
+		} else {
+			sendMaxGalleryLen = maxGalleryLen;
+		}
 		browser.tabs.sendMessage(
 			currentTab.current.id,
 			{
 				type: "create_gallery",
-				maxGalleryLen: maxGalleryLen
+				maxGalleryLen: sendMaxGalleryLen
 			}
 		).then((response) => {
 			setGallery(response.gallery);
@@ -58,20 +66,24 @@ const Popup = () => {
 
 	return (
 		<>
-			<div className='container'> { tabURL && (
+			<div className='container'>
+				{ tabURL && (
 					<>
-						{/* <div className="query">Query: { tabURL.searchParams.get('q') } </div> */}
-						<input
-							type="number"
-							step={1}
-							min={1}
-							max={50}
-							onChange={(e) => setMaxGalleryLen(Number(e.target.value))}
-							value={maxGalleryLen}
-						/>
-						<button disabled={isCreatingGallery} onClick={() => createGallery()}>{!gallery ? "Create Gallery" : "Recreate Gallery"}</button>
-						<div className="gallery">Gallery length: { (gallery && gallery.length) ? gallery.length : "empty" } </div>
-						<button disabled={!(gallery && gallery.length)} onClick={() => {openSession();}}>Open session</button>
+						<div className="setting">
+							<label>Gallery Length</label>
+							<input
+								type="number"
+								step={1}
+								min={1}
+								max={50}
+								onChange={(e) => setMaxGalleryLen(Number(e.target.value))}
+								value={maxGalleryLen}
+							/>
+						</div>
+						<div className='buttons'>
+							<button className={isCreatingGallery ? "inProgress" : ""} disabled={isCreatingGallery} onClick={() => createGallery()}>{!gallery ? "CREATE GALLERY" : "RECREATE GALLERY"}</button>
+							<button disabled={!(gallery && gallery.length)} onClick={() => {openSession();}}>OPEN SESSION</button>
+						</div>
 					</>
 				) }
 				{ invalidURL && (

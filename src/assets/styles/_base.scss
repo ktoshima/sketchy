@@ -7,9 +7,30 @@ $primary: #F4F0E5;
 $secondary: #A7A19B;
 $accent: #D44C45;
 
+* {
+	box-sizing: border-box
+}
+
 body {
 	margin: 0;
 	padding: 0;
 	font-family: $font-family;
 	font-weight: $font-weight;
+	border: none;
+
+	button {
+		font-family: $font-family;
+		font-weight: $font-weight;
+		background-color: $accent;
+		color: $primary;
+		border: none;
+		border-radius: 200px;
+		cursor: pointer;
+	}
+	button:disabled {
+		background-color: $secondary;
+		color: $base;
+		cursor: not-allowed;
+	}
+
 }

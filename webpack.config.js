@@ -62,10 +62,6 @@ module.exports = {
 					from: './src/assets/styles/index.css',
 					to: path.join(__dirname, 'dist')
 				},
-				// {
-				// 	from: './src/assets/styles/popup.css',
-				// 	to: path.join(__dirname, 'dist')
-				// },
 			]
 		}),
 		new HtmlWebpackPlugin({
