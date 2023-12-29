@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Background from './components/Background';
+import UrlAlert from './components/UrlAlert';
 
 const Popup = () => {
 	const currentTab = useRef(null);
@@ -87,9 +88,7 @@ const Popup = () => {
 					</>
 				) }
 				{ invalidURL && (
-					<>
-						<div className="error">Not Google Image Search tab</div>
-					</>
+					<UrlAlert />
 				) }
 			</div>
 			<Background />
