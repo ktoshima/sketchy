@@ -7,7 +7,7 @@ const Popup = () => {
 	const [tabURL, setTabURL] = useState(null);
 	const [invalidURL, setInvalidURL] = useState(false);
 	const [isCreatingGallery, setIsCreatingGallery] = useState(false)
-	const [maxGalleryLen, setMaxGalleryLen] = useState(30);
+	const [maxGalleryLen, setMaxGalleryLen] = useState(1);
 	const [gallery, setGallery] = useState(null);
 
 	// run only once initialized

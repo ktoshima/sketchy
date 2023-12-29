@@ -9,6 +9,7 @@ const SessionSettings = () => {
 	const {
 		gallery, galleryDispatch,
 		queueDispatch,
+		imageQuery, setImageQuery,
 		sketchNum, setSketchNum,
 		sketchTime, setSketchTime,
 		interval, setInterval
@@ -29,11 +30,12 @@ const SessionSettings = () => {
 			browser.runtime.sendMessage({
 				type: "request_gallery"
 			}).then((res) => {
+				setImageQuery(res.image_query);
 				galleryDispatch({type: 'SET_GALLERY', payload: res.gallery});
 			})
 		}
 		requestGallery();
-	}, [galleryDispatch])
+	}, [galleryDispatch, setImageQuery]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -67,55 +69,67 @@ const SessionSettings = () => {
 
 
 	return (
-		<form action="" className="form" onSubmit={handleSubmit}>
-			<h3>Number of images in gallery: {gallery ? gallery.length : 0}</h3>
-			<h3>Set Number of Sketch</h3>
-			<input
-				type="number"
-				step="1"
-				min="1"
-				onChange={(e) => setSketchNum(Number(e.target.value))}
-				value={sketchNum}
-				className={emptyFields.includes('sketchNum') ? 'error' : ''}
-			/>
-			<h3>Set Sketch Time</h3>
-			<input
-				type="number"
-				step="1"
-				min="0"
-				onChange={(e) => setMinute(Number(e.target.value))}
-				value={minute}
-				className={emptyFields.includes('sketchTime') ? 'error' : ''}
-			/>
-			<label htmlFor="">m</label>
-			<input
-				type="number"
-				step="1"
-				min="0"
-				onChange={(e) => setSecond(Number(e.target.value))}
-				value={second}
-				className={emptyFields.includes('sketchTime') ? 'error' : ''}
-			/>
-			<label htmlFor="">s</label>
-			<h3>Set interval</h3>
-			<input
-				type="number"
-				step="1"
-				min="0"
-				onChange={(e) => setInterval(Number(e.target.value))}
-				value={interval}
-				className={emptyFields.includes('interval') ? 'error' : ''}
-			/>
-			<label htmlFor="">s</label>
-			<h3>Shuffle</h3>
-			<input
-				type="checkbox"
-				onChange={(e) => setShuffleQueue(e.target.checked)}
-			/>
+		<div className="session-settings">
+			<h1>Session Settings</h1>
+			<div className="session-info">
+				<div className="session-info_row">
+					<div className="session-info_row_title">Image Query:</div>
+					<div className="session-info_row_item">{imageQuery}</div>
+				</div>
+				<div className="session-info_row">
+					<div className="session-info_row_title">Gallery Length:</div>
+					<div className="session-info_row_item">{gallery ? gallery.length : 0}</div>
+				</div>
+			</div>
+			<form action="" className="form" onSubmit={handleSubmit}>
+				<h3>Set Number of Sketch</h3>
+				<input
+					type="number"
+					step="1"
+					min="1"
+					onChange={(e) => setSketchNum(Number(e.target.value))}
+					value={sketchNum}
+					className={emptyFields.includes('sketchNum') ? 'error' : ''}
+				/>
+				<h3>Set Sketch Time</h3>
+				<input
+					type="number"
+					step="1"
+					min="0"
+					onChange={(e) => setMinute(Number(e.target.value))}
+					value={minute}
+					className={emptyFields.includes('sketchTime') ? 'error' : ''}
+				/>
+				<label htmlFor="">m</label>
+				<input
+					type="number"
+					step="1"
+					min="0"
+					onChange={(e) => setSecond(Number(e.target.value))}
+					value={second}
+					className={emptyFields.includes('sketchTime') ? 'error' : ''}
+				/>
+				<label htmlFor="">s</label>
+				<h3>Set interval</h3>
+				<input
+					type="number"
+					step="1"
+					min="0"
+					onChange={(e) => setInterval(Number(e.target.value))}
+					value={interval}
+					className={emptyFields.includes('interval') ? 'error' : ''}
+				/>
+				<label htmlFor="">s</label>
+				<h3>Shuffle</h3>
+				<input
+					type="checkbox"
+					onChange={(e) => setShuffleQueue(e.target.checked)}
+				/>
 
-			<button>Start</button>
-			{ Boolean(error.length) && error.map((e) =>(<div className="error"> { e } </div>)) }
-		</form>
+				<button>Start</button>
+				{ Boolean(error.length) && error.map((e) =>(<div className="error"> { e } </div>)) }
+			</form>
+		</div>
 	)
 
 }

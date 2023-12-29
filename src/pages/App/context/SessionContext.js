@@ -57,6 +57,7 @@ export const SessionContextProvider = ({ children }) => {
 	const [queueState, queueDispatch] = useReducer(queueReducer, {
 		queue: null
 	});
+	const [imageQuery, setImageQuery] = useState(null);
 	const [isFinished, setIsFinished] = useState(false);
 	const [sketchNum, setSketchNum] = useState(10);
 	const [sketchTime, setSketchTime] = useState(30);
@@ -67,6 +68,7 @@ export const SessionContextProvider = ({ children }) => {
 				{
 					...galleryState, galleryDispatch,
 					...queueState, queueDispatch,
+					imageQuery, setImageQuery,
 					isFinished, setIsFinished,
 					sketchNum, setSketchNum,
 					sketchTime, setSketchTime,
