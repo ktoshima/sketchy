@@ -1,0 +1,58 @@
+@use 'base';
+
+$title-color: #D3CCC1;
+
+body {
+	min-height: 100vh;
+	background-color: base.$base;
+	position: relative;
+
+	.session-settings {
+
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin: 138px auto 0;
+		width: 571px;
+		color: $title-color;
+
+		h1 {
+			text-align: center;
+			font-size: 48px;
+			line-height: 20px;
+			margin-bottom: 52px;
+		}
+
+		.session-info {
+			.session-info_row {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				line-height: 20px;
+				margin: 20px 0;
+
+				.session-info_row_title {
+					font-size: 32px;
+				}
+				.session-info_row_item {
+					color: #A7A19B;
+					font-size: 28px;
+				}
+			}
+		}
+
+	}
+
+	.background-layer {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		img {
+			position: inherit;
+			bottom: 0;
+			right: 0;
+		}
+	}
+}
