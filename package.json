@@ -2,6 +2,7 @@
   "name": "sketchy",
   "version": "0.1.0",
   "dependencies": {
+    "@fontsource/ntr": "^5.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0"
