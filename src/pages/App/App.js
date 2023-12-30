@@ -9,6 +9,7 @@ import Background from './components/Background';
 function App() {
   return (
     <div className="App">
+      <Background />
       <BrowserRouter>
         <div className="pages">
           <Routes>
@@ -27,7 +28,6 @@ function App() {
         </Routes>
         </div>
       </BrowserRouter>
-      <Background />
     </div>
   );
 }

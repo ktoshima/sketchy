@@ -1,7 +1,7 @@
 import AppBG from '../../../assets/images/app_bg.svg';
 
 const Background = () => (
-	<div className="background-layer">
+	<div id="background-layer">
 		<img src={AppBG} alt="" />
 	</div>
 );
