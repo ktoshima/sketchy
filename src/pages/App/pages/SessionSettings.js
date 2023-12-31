@@ -18,7 +18,7 @@ const SessionSettings = () => {
 	const [minute, setMinute] = useState();
 	const [second, setSecond] = useState(sketchTime);
 	const [emptyFields, setEmptyFields] = useState([]);
-	const [shuffleQueue, setShuffleQueue] = useState(false);
+	const [shuffleQueue, setShuffleQueue] = useState(true);
 	const [error, setError] = useState([]);
 	const navigate = useNavigate();
 
@@ -77,11 +77,11 @@ const SessionSettings = () => {
 			<h1>Session Settings</h1>
 			<div id="session-info">
 				<div className="session-info_row">
-					<div className="session-info_row_title">Image Query:</div>
+					<div className="session-info_row_title">Image Query</div>
 					<div className="session-info_row_item">{imageQuery}</div>
 				</div>
 				<div className="session-info_row">
-					<div className="session-info_row_title">Gallery Length:</div>
+					<div className="session-info_row_title">Gallery Length</div>
 					<div className="session-info_row_item">{gallery ? gallery.length : 0}</div>
 				</div>
 			</div>
@@ -137,18 +137,18 @@ const SessionSettings = () => {
 					<label className="sublabel" htmlFor={intervalInput}>s</label>
 				</div>
 				<div>
-					<div id="switch">
-						<label id="toggle" htmlFor={shuffleButton}>
+					<div className="switch">
+						<label className="toggle" htmlFor={shuffleButton}>
 							<input
 								id={shuffleButton}
 								type="checkbox"
+								defaultChecked={shuffleQueue}
 								onChange={(e) => setShuffleQueue(e.target.checked)}
 							/>
-							<span id="slider"></span>
-							<span id="slider_label"></span>
+							<span className="slider"></span>
 						</label>
 					</div>
-					<label id="btn-label" htmlFor={shuffleButton}>Shuffle Images</label>
+					<label className="switch-label" htmlFor={shuffleButton}>Shuffle Images</label>
 				</div>
 			</div>
 			<button onClick={() => handleStartSession()}>START SESSION</button>
