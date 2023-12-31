@@ -58,10 +58,6 @@ module.exports = {
 					from: './src/manifest.json',
 					to: path.join(__dirname, 'dist')
 				},
-				{
-					from: './src/assets/styles/index.css',
-					to: path.join(__dirname, 'dist')
-				},
 			]
 		}),
 		new HtmlWebpackPlugin({
