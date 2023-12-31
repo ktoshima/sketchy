@@ -138,18 +138,17 @@ const SessionSettings = () => {
 				</div>
 				<div>
 					<div id="switch">
-						<input
-							id={shuffleButton}
-							type="checkbox"
-							onChange={(e) => setShuffleQueue(e.target.checked)}
-						/>
-						<label id="tgl-btn" htmlFor={shuffleButton}></label>
+						<label id="toggle" htmlFor={shuffleButton}>
+							<input
+								id={shuffleButton}
+								type="checkbox"
+								onChange={(e) => setShuffleQueue(e.target.checked)}
+							/>
+							<span id="slider"></span>
+							<span id="slider_label"></span>
+						</label>
 					</div>
 					<label id="btn-label" htmlFor={shuffleButton}>Shuffle Images</label>
-				</div>
-				<div class="checkbox-wrapper-34">
-					<input class='tgl tgl-ios' id='toggle-34' type='checkbox' />
-					<label class='tgl-btn' for='toggle-34'></label>
 				</div>
 			</div>
 			<button onClick={() => handleStartSession()}>START SESSION</button>
