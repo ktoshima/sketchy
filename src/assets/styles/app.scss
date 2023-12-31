@@ -7,13 +7,16 @@ body {
 	background-color: base.$base;
 	position: relative;
 	line-height: 20px;
+	overflow: hidden;
 
 	#session-settings {
 
 		position: absolute;
 		left: 0;
 		right: 0;
-		margin: 125px auto 0;
+		top: calc(100vh*0.5);
+		transform: translateY(-50%);
+		margin: auto;
 		width: 571px;
 		color: $title-color;
 
@@ -45,14 +48,16 @@ body {
 		}
 
 		#session-form {
+			$row-form-height: 35px;
+			$row-btn-height: 24px;
 			padding-top: 20px;
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
-			grid-template-rows: repeat(3, 35px) 24px;
+			grid-template-rows: repeat(3, $row-form-height) $row-btn-height;
 			row-gap: 40px;
-			vertical-align: baseline;
 
 			.input-title {
+				line-height: $row-form-height;
 				font-size: 28px;
 				justify-self: left;
 			}
@@ -74,15 +79,20 @@ body {
 				}
 			}
 
-			#switch {
+			.switch {
 				$tgl-width: 48px;
-				$tgl-height: 24px;
+				$tgl-height: $row-btn-height;
 				$tgl-padding: 4px;
+				$label-padding: 3px;
 
-				#toggle {
-					box-sizing: border-box;
+				width: $tgl-width;
+				height: $tgl-height;
 
-					#slider {
+				display: inline-block;
+
+				.toggle {
+
+					.slider {
 						position: relative;
 						display: inline-block;
 						cursor: pointer;
@@ -94,27 +104,48 @@ body {
 						transition: 0.4s;
 
 						&:before, &:after {
-
+							position: relative;
+							display: inline-block;
+							height: 100%;
+							transition: 0.4s;
 						}
 
 						&:before {
-							position: relative;
-							display: inline-block;
-							content: "";
-							height: 100%;
 							width: calc($tgl-height - 2*$tgl-padding);
 							border-radius: 50%;
-							transition: 0.4s;
+							content: "";
 							background-color: base.$primary;
+						}
+
+						&:after {
+							position: absolute;
+							padding: 0 $label-padding 0 0;
+							right: $tgl-padding;
+							text-align: right;
+							font-size: 14px;
+							line-height: calc($tgl-height - 2*$tgl-padding);
+							width: auto;
+							height: calc($tgl-height - 2*$tgl-padding);
+							line-height: calc($tgl-height - 2*$tgl-padding);
+							color: base.$base;
+							content: "Off";
 						}
 
 					}
 
-					input:checked+#slider {
+					input:checked+.slider {
 						background-color: base.$primary;
 						&:before {
 							background-color: base.$base;
 							transform: translateX(calc($tgl-width - $tgl-height));
+							transition: 0.4s;
+						}
+						&:after {
+							content: "On";
+							color: base.$base;
+							padding: 0 0 0 $label-padding;
+							text-align: left;
+							left: $tgl-padding;
 							transition: 0.4s;
 						}
 					}
@@ -124,6 +155,16 @@ body {
 					}
 
 				}
+			}
+
+			label.switch-label {
+				position: absolute;
+				display: inline-block;
+				height: 100%;
+				width: auto;
+				font-size: 20px;
+				line-height: $row-btn-height;
+				padding-left: 24px;
 			}
 
 			input[type=number] {
@@ -146,7 +187,78 @@ body {
 		}
 	}
 
+	#session {
+		$session-margin: 80px;
+
+		margin: 0 $session-margin;
+
+		#viewer {
+			width: 100%;
+			height: calc(100vh - $session-margin);
+
+			#viewer-message {
+				color: base.$primary;
+				text-align: center;
+				font-size: 30px;
+				height: 100%;
+				margin: auto;
+			}
+
+
+		}
+
+		#player {
+			$player-height: 68px;
+			$timer-width: 71px;
+			$timer-height: 36px;
+
+			height: $player-height;
+			display: flex;
+
+
+			.flex-btn-space {
+				width: 13px;
+			}
+
+			.flex-right-space {
+				width: $timer-width;
+			}
+
+			.flex-initial {
+				flex: initial;
+			}
+
+			.flex-auto {
+				flex: auto;
+			}
+
+			.flex-btn {
+				margin: auto;
+			}
+
+			#timer {
+				font-size: 32px;
+				line-height: $timer-height;
+				text-align: left;
+				color: base.$primary;
+				width: $timer-width;
+				height: $timer-height;
+				margin: auto;
+			}
+
+			.player-btn {
+				width: 70px;
+				height: $timer-height;
+				border-radius: 40px;
+				background-color: base.$primary;
+				color: base.$base;
+			}
+
+		}
+	}
+
 	#background-layer {
+		z-index: -1;
 		width: 100%;
 		height: 100%;
 		position: absolute;

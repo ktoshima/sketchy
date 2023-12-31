@@ -73,11 +73,16 @@ const Session = () => {
 	};
 
 	return (
-		<>
+		<div id="session">
 			<Viewer viewObject={viewObject} />
-			{ countTime && <Timer queuePos={queuePos.current} countTime={countTime} /> }
-			{ !isFinished && <button onClick={() => skip()}>Skip</button>}
-		</>
+			<div id="player">
+				{ countTime && <Timer queuePos={queuePos.current} countTime={countTime} /> }
+				<div className="flex-btn-space"></div>
+				{ !isFinished && <div className="flex-initial flex-btn"><button id="skip" className="player-btn" onClick={() => skip()}>skip</button></div>}
+				<div className="flex-auto"></div>
+				<div className="flex-right-space flex-initial"></div>
+			</div>
+		</div>
 	)
 };
 

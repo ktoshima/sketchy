@@ -32,8 +32,9 @@ const Timer = ({ queuePos, countTime }) => {
 
 	return (
 		<>
-			<div>{ String(Math.floor(timeRemaining/60)).padStart(2, '0') }:{ String(timeRemaining%60).padStart(2, '0') }</div>
-			<button disabled={timeRemaining<=0} onClick={() => toggleRunning()}>{isRunning ? 'pause' : 'start'}</button>
+			<div id="timer" className="flex-initial">{ String(Math.floor(timeRemaining/60)).padStart(2, '0') }:{ String(timeRemaining%60).padStart(2, '0') }</div>
+			<div className="flex-auto"></div>
+			<div className="flex-initial flex-btn"><button id="play-toggle" className="player-btn" disabled={timeRemaining<=0} onClick={() => toggleRunning()}>{isRunning ? 'pause' : 'start'}</button></div>
 		</>
 	)
 }
