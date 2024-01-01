@@ -195,13 +195,16 @@ body {
 		#viewer {
 			width: 100%;
 			height: calc(100vh - $session-margin);
+			display: flex;
+			align-items: center;
+			justify-content: center;
 
 			#viewer-message {
 				color: base.$primary;
 				text-align: center;
 				font-size: 30px;
-				height: 100%;
-				margin: auto;
+				line-height: 30px;
+				height: auto;
 			}
 
 
@@ -214,6 +217,7 @@ body {
 
 			height: $player-height;
 			display: flex;
+			align-items: center;
 
 
 			.flex-btn-space {
@@ -232,9 +236,6 @@ body {
 				flex: auto;
 			}
 
-			.flex-btn {
-				margin: auto;
-			}
 
 			#timer {
 				font-size: 32px;
@@ -244,6 +245,10 @@ body {
 				width: $timer-width;
 				height: $timer-height;
 				margin: auto;
+
+				&.red {
+					color: base.$accent;
+				}
 			}
 
 			.player-btn {
