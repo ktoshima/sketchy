@@ -224,8 +224,10 @@ body {
 
 		#player {
 			$player-height: 68px;
-			$timer-width: 71px;
 			$timer-height: 36px;
+			$drawing-num-height: 24px;
+			$timer-width: 71px;
+			$timer-font-size: 32px;
 
 			height: $player-height;
 			display: flex;
@@ -242,6 +244,7 @@ body {
 
 			.flex-initial {
 				flex: initial;
+				height: $timer-height;
 			}
 
 			.flex-auto {
@@ -250,17 +253,19 @@ body {
 
 
 			#timer {
-				font-size: 32px;
-				line-height: $timer-height;
 				text-align: left;
 				color: base.$primary;
 				width: $timer-width;
 				height: $timer-height;
 				margin: auto;
 
+				font-size: $timer-font-size;
+				line-height: $timer-height;
+
 				&.red {
 					color: base.$accent;
 				}
+
 			}
 
 			.player-btn {
@@ -269,8 +274,17 @@ body {
 				border-radius: 40px;
 				background-color: base.$primary;
 				color: base.$base;
+				img {
+					display: block;
+					margin: auto;
+				}
 			}
 
+			#drawing-num {
+				text-align: right;
+				font-size: $timer-font-size;
+				line-height: $timer-height;
+			}
 		}
 	}
 
