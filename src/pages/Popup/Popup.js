@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import Background from './components/Background';
 import UrlAlert from './components/UrlAlert';
 
@@ -63,6 +63,7 @@ const Popup = () => {
 	};
 
 
+	const galleryLengthInput = useId();
 
 
 	return (
@@ -71,8 +72,9 @@ const Popup = () => {
 				{ tabURL && (
 					<>
 						<div className="setting">
-							<label>Gallery Length</label>
+							<label htmlFor={galleryLengthInput}>Gallery Length</label>
 							<input
+								id={galleryLengthInput}
 								type="number"
 								step={1}
 								min={1}
