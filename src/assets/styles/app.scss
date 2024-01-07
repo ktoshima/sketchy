@@ -55,6 +55,7 @@ body {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
 			grid-template-rows: repeat(3, $row-form-height) $row-btn-height;
+			justify-content: space-between;
 			row-gap: 40px;
 
 			.input-title {
@@ -72,7 +73,7 @@ body {
 					font-size: 24px;
 					width: 70px;
 				}
-				label.sublabel {
+				.sublabel {
 					display: inline-block;
 					width: 16px;
 					font-size: 20px;
@@ -80,94 +81,101 @@ body {
 				}
 			}
 
-			.switch {
-				$tgl-width: 48px;
-				$tgl-height: $row-btn-height;
-				$tgl-padding: 4px;
-				$label-padding: 3px;
+			.switch-row {
+				justify-self: left;
+				align-self: start;
+				height: 100%;
 
-				width: $tgl-width;
-				height: $tgl-height;
+				.switch {
+					$tgl-width: 48px;
+					$tgl-height: $row-btn-height;
+					$tgl-padding: 4px;
+					$label-padding: 3px;
 
-				display: inline-block;
+					display: inline-block;
 
-				.toggle {
+					.toggle {
 
-					.slider {
-						position: relative;
 						display: inline-block;
-						cursor: pointer;
-						width: $tgl-width;
-						height: $tgl-height;
-						border-radius: $tgl-height;
-						background-color: base.$secondary;
-						padding: $tgl-padding;
-						transition: 0.4s;
-						line-height: 14px;
+						height: 100%;
 
-						&:before, &:after {
+						.slider {
 							position: relative;
 							display: inline-block;
-							height: 100%;
+							cursor: pointer;
+							width: $tgl-width;
+							height: $tgl-height;
+							border-radius: $tgl-height;
+							background-color: base.$secondary;
+							padding: $tgl-padding;
 							transition: 0.4s;
+							line-height: 14px;
+
+							&:before, &:after {
+								position: relative;
+								display: inline-block;
+								height: 100%;
+								transition: 0.4s;
+							}
+
+							&:before {
+								width: calc($tgl-height - 2*$tgl-padding);
+								border-radius: 50%;
+								content: "";
+								background-color: base.$primary;
+							}
+
+							&:after {
+								position: absolute;
+								padding: 0 $label-padding 0 0;
+								right: $tgl-padding;
+								text-align: right;
+								font-size: 14px;
+								width: auto;
+								height: calc($tgl-height - 2*$tgl-padding);
+								line-height: calc($tgl-height - 2*$tgl-padding);
+								color: base.$base;
+								content: "Off";
+							}
+
 						}
 
-						&:before {
-							width: calc($tgl-height - 2*$tgl-padding);
-							border-radius: 50%;
-							content: "";
+						input:checked+.slider {
 							background-color: base.$primary;
+							&:before {
+								background-color: base.$base;
+								transform: translateX(calc($tgl-width - $tgl-height));
+								transition: 0.4s;
+							}
+							&:after {
+								content: "On";
+								color: base.$base;
+								padding: 0 0 0 $label-padding;
+								text-align: left;
+								left: $tgl-padding;
+								transition: 0.4s;
+							}
 						}
 
-						&:after {
-							position: absolute;
-							padding: 0 $label-padding 0 0;
-							right: $tgl-padding;
-							text-align: right;
-							font-size: 14px;
-							line-height: calc($tgl-height - 2*$tgl-padding);
-							width: auto;
-							height: calc($tgl-height - 2*$tgl-padding);
-							line-height: calc($tgl-height - 2*$tgl-padding);
-							color: base.$base;
-							content: "Off";
+						input {
+							display: none;
 						}
 
 					}
+				}
 
-					input:checked+.slider {
-						background-color: base.$primary;
-						&:before {
-							background-color: base.$base;
-							transform: translateX(calc($tgl-width - $tgl-height));
-							transition: 0.4s;
-						}
-						&:after {
-							content: "On";
-							color: base.$base;
-							padding: 0 0 0 $label-padding;
-							text-align: left;
-							left: $tgl-padding;
-							transition: 0.4s;
-						}
-					}
-
-					input {
-						display: none;
-					}
-
+				.switch-label {
+					// position: absolute;
+					position: relative;
+					display: inline-block;
+					height: 100%;
+					width: auto;
+					font-size: 20px;
+					line-height: $row-btn-height;
+					padding-left: 24px;
 				}
 			}
 
-			label.switch-label {
-				position: absolute;
-				display: inline-block;
-				height: 100%;
-				width: auto;
-				font-size: 20px;
-				line-height: $row-btn-height;
-				padding-left: 24px;
-			}
 
 			input[type=number] {
 				width: 89px;
@@ -278,6 +286,12 @@ body {
 					display: block;
 					margin: auto;
 				}
+
+				&:hover {
+					transition: 0.1s;
+					background-color: base.$primary-dark;
+				}
+
 			}
 
 			#drawing-num {

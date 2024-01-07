@@ -136,7 +136,7 @@ const SessionSettings = () => {
 					/>
 					<label className="sublabel" htmlFor={intervalInput}>s</label>
 				</div>
-				<div>
+				<div className="switch-row">
 					<div className="switch">
 						<label className="toggle" htmlFor={shuffleButton}>
 							<input
