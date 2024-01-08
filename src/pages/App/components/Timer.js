@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import { useTimer } from "../hooks/useTimer"
 import { useSessionContext } from "../hooks/useSessionContext"
 
+import pauseIcon from '../../../assets/images/pause.svg';
+import playIcon from '../../../assets/images/play.svg';
+
 const Timer = ({ queuePos, countTime }) => {
 
 	const {
@@ -32,8 +35,18 @@ const Timer = ({ queuePos, countTime }) => {
 
 	return (
 		<>
-			<div>{ String(Math.floor(timeRemaining/60)).padStart(2, '0') }:{ String(timeRemaining%60).padStart(2, '0') }</div>
-			<button disabled={timeRemaining<=0} onClick={() => toggleRunning()}>{isRunning ? 'pause' : 'start'}</button>
+			<div id="timer" className={"flex-initial" + (queuePos !== 0 && Math.floor(timeRemaining/60)===0 && timeRemaining%60<=5 ? " red" : "")}>
+					{ String(Math.floor(timeRemaining/60)).padStart(2, '0') }:{ String(timeRemaining%60).padStart(2, '0') }
+			</div>
+			<div className="flex-auto"></div>
+			<div className="flex-initial">
+				<button id="play-toggle" className="player-btn" disabled={timeRemaining<=0} onClick={() => toggleRunning()}>
+					{isRunning ?
+						<img src={pauseIcon} alt="pause" /> : <img src={playIcon} alt="play" />
+					}
+
+				</button>
+				</div>
 		</>
 	)
 }

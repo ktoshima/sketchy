@@ -4,8 +4,12 @@ $font-family: 'NTR';
 $font-weight: 400;
 $base: #4C4C4C;
 $primary: #F4F0E5;
+$primary-dark: #C6C6C5;
 $secondary: #A7A19B;
+$secondary-dark: #938B83;
+$form-color: #D3CCC1;
 $accent: #D44C45;
+$accent-dark: #BE3A33;
 
 * {
 	box-sizing: border-box;
@@ -26,11 +30,24 @@ body {
 		border: none;
 		border-radius: 200px;
 		cursor: pointer;
-	}
-	button:disabled {
-		background-color: $secondary;
-		color: $base;
-		cursor: not-allowed;
+
+		&:hover {
+			background-color: $accent-dark;
+			// color: $primary-dark;
+			transition: 0.1s;
+		}
+
+		&:disabled {
+			background-color: $secondary;
+			color: $base;
+			cursor: not-allowed;
+		}
+
+		&:disabled:hover {
+			background-color: $secondary-dark;
+			transition: 0.1s;
+		}
+
 	}
 
 }

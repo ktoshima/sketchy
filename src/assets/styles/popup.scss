@@ -1,8 +1,5 @@
 @use 'base';
 
-$form-color: #D3CCC1;
-$alert-color: #F3EFE4;
-
 body {
 	width: 226px;
 	height: 220px;
@@ -16,13 +13,27 @@ body {
 
 
 		.background-layer {
+			z-index: -1;
 			width: 100%;
 			height: 100%;
 		}
 
+		#logo {
+			position: absolute;
+			left: 132px;
+			top: 34px;
+			color: base.$primary;
+			font-family: Simonetta;
+			font-size: 24px;
+			line-height: 24px;
+			font-size: 24px;
+			font-style: normal;
+		}
+
 		.container {
 			position: absolute;
-			margin: 82px 16px 0px;
+			padding: 82px 16px 0px;
+			width: 100%;
 
 			.setting {
 				width: 100%;
@@ -36,7 +47,7 @@ body {
 					padding: 0;
 					font-size: 16px;
 					line-height: 20px;
-					color: $form-color;
+					color: base.$form-color;
 				}
 
 				input[type=number] {
@@ -48,16 +59,33 @@ body {
 					line-height: 20px;
 					border-radius: 4px;
 					border: none;
-					background-color: $form-color;
+					color: base.$base;
+					background-color: base.$form-color;
 				}
 			}
 			.buttons {
 				margin-top: 17px;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				row-gap: 7px;
+
 				button {
-					margin: 4px 0;
+					padding-left: 13px;
 					width: 100%;
 					height: 39px;
 					font-size: 18px;
+
+					div {
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						justify-content: start;
+
+						span {
+							margin-left: 5px;
+						}
+					}
 				}
 				button.inProgress {
 					cursor: wait;
@@ -65,16 +93,17 @@ body {
 			}
 
 			.url-alert {
-				color: $alert-color;
+				width: 100%;
+				color: base.$primary;
 				font-size: 18px;
 				line-height: 24px;
 				word-wrap: break-word;
 				text-align: center;
 
 				img {
-					width: 59px;
-					height: 51px;
-					margin-bottom: 15px;
+					width: 56px;
+					height: 56px;
+					margin-bottom: 5px;
 				}
 
 			}

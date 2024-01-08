@@ -5,6 +5,8 @@ import { useSessionContext } from "../hooks/useSessionContext";
 import Viewer from "../components/Viewer";
 import Timer from '../components/Timer';
 
+import skipIcon from "../../../assets/images/skip.svg";
+
 
 const Session = () => {
 	const {
@@ -73,11 +75,26 @@ const Session = () => {
 	};
 
 	return (
-		<>
+		<div id="session">
 			<Viewer viewObject={viewObject} />
-			{ countTime && <Timer queuePos={queuePos.current} countTime={countTime} /> }
-			{ !isFinished && <button onClick={() => skip()}>Skip</button>}
-		</>
+			<div id="player">
+				{ countTime && <Timer queuePos={queuePos.current} countTime={countTime} /> }
+				<div className="flex-btn-space"></div>
+				{ !isFinished && <div className="flex-initial">
+					<button id="skip" className="player-btn" onClick={() => skip()}>
+						<img src={skipIcon} alt="skip" />
+					</button>
+				</div>}
+				<div className="flex-auto"></div>
+				<div className="flex-right-space flex-initial">
+				{viewObject && viewObject.type === "drawing" &&
+					<div id="drawing-num">
+						#{viewObject.drawingNum}/{viewObject.outof}
+					</div>
+				}
+				</div>
+			</div>
+		</div>
 	)
 };
 

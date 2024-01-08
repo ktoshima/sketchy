@@ -4,13 +4,12 @@ import { Navigate } from 'react-router-dom';
 // pages and components
 import SessionSettings from './pages/SessionSettings';
 import Session from './pages/Session';
-import Navbar from './components/Navbar';
+import Background from './components/Background';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
         <div className="pages">
           <Routes>
             <Route
@@ -28,6 +27,7 @@ function App() {
         </Routes>
         </div>
       </BrowserRouter>
+      <Background />
     </div>
   );
 }
