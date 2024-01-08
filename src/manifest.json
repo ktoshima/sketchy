@@ -8,7 +8,7 @@
 		"activeTab"
 	],
 	"action": {
-		"default_title": "Open sketchy",
+		"default_title": "Open Sketchy",
 		"default_popup": "popup.html"
 	},
 	"background": {
@@ -17,7 +17,10 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["https://www.google.com/search?*q=*&tbm=isch*"],
+			"matches": [
+				"https://www.google.com/search?*q=*&tbm=isch*",
+				"https://www.google.com/search?*tbm=isch*&q=*"
+			],
 			"js": ["contentScript.bundle.js"]
 		}
 	]
