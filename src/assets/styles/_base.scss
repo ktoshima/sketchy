@@ -4,11 +4,12 @@ $font-family: 'NTR';
 $font-weight: 400;
 $base: #4C4C4C;
 $primary: #F4F0E5;
-$primary-dark: #b5b1a8;
+$primary-dark: #C6C6C5;
 $secondary: #A7A19B;
-$secondary-dark: #827d78;
+$secondary-dark: #938B83;
+$form-color: #D3CCC1;
 $accent: #D44C45;
-$accent-dark: #ac3a35;
+$accent-dark: #BE3A33;
 
 * {
 	box-sizing: border-box;
@@ -32,6 +33,7 @@ body {
 
 		&:hover {
 			background-color: $accent-dark;
+			// color: $primary-dark;
 			transition: 0.1s;
 		}
 
