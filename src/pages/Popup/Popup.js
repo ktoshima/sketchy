@@ -1,13 +1,17 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
 import Background from './components/Background';
 import UrlAlert from './components/UrlAlert';
+import CreateGalleryIconLight from '../../assets/images/create_gallery-icon-primary.svg';
+import CreateGalleryIconDark from '../../assets/images/create_gallery-icon-base.svg';
+import OpenSessionIconLight from '../../assets/images/open_session-icon-primary.svg';
+import OpenSessionIconDark from '../../assets/images/open_session-icon-base.svg';
 
 const Popup = () => {
 	const currentTab = useRef(null);
 	const [tabURL, setTabURL] = useState(null);
 	const [invalidURL, setInvalidURL] = useState(false);
 	const [isCreatingGallery, setIsCreatingGallery] = useState(false)
-	const [maxGalleryLen, setMaxGalleryLen] = useState(1);
+	const [maxGalleryLen, setMaxGalleryLen] = useState(10);
 	const [gallery, setGallery] = useState(null);
 
 	// run only once initialized
@@ -68,6 +72,7 @@ const Popup = () => {
 
 	return (
 		<>
+			<div id="logo">Sketchy</div>
 			<div className='container'>
 				{ tabURL && (
 					<>
@@ -84,8 +89,29 @@ const Popup = () => {
 							/>
 						</div>
 						<div className='buttons'>
-							<button className={isCreatingGallery ? "inProgress" : ""} disabled={isCreatingGallery} onClick={() => createGallery()}>{!gallery ? "CREATE GALLERY" : "RECREATE GALLERY"}</button>
-							<button disabled={!(gallery && gallery.length)} onClick={() => {openSession();}}>OPEN SESSION</button>
+							<button
+								className={isCreatingGallery ? "inProgress" : ""}
+								disabled={isCreatingGallery} onClick={() => createGallery()}
+							>
+								<div>
+									<img src={
+										isCreatingGallery ? CreateGalleryIconDark : CreateGalleryIconLight
+										} alt="" />
+									<span>CREATE GALLERY</span>
+								</div>
+
+							</button>
+							<button
+								disabled={!(gallery && gallery.length)}
+								onClick={() => {openSession();}}
+							>
+								<div>
+									<img src={
+										!(gallery && gallery.length) ? OpenSessionIconDark : OpenSessionIconLight
+									} alt="" />
+									<span>OPEN SESSION</span>
+								</div>
+							</button>
 						</div>
 					</>
 				) }
