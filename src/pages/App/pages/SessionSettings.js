@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 // import context
 import { useSessionContext } from "../hooks/useSessionContext";
 
-
 const SessionSettings = () => {
 	const {
 		gallery, galleryDispatch,
@@ -21,8 +20,6 @@ const SessionSettings = () => {
 	const [shuffleQueue, setShuffleQueue] = useState(true);
 	const [error, setError] = useState([]);
 	const navigate = useNavigate();
-
-
 
 	// request gallery when initialized
 	useEffect(() => {
