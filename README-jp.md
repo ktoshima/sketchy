@@ -1,13 +1,14 @@
 # Sketchy
 SketchyはGoogle画像検索の結果からドローイングの練習のためのスライドショーを実行できるブラウザ拡張機能です.
-**Sketchyはまだアルファ版の段階であるため、バグや問題が含まれている可能性があります**。SketchyはMITライセンスでリリースされているので、**ご自身の判断でご利用ください**。また、バグに遭遇した場合は[issues](https://github.com/ktoshima/sketchy/issues)までご報告ください。
+**Sketchyはまだアルファ版の段階であるため、バグや問題が含まれている可能性があります**。Sketchyは[MITライセンス](https://mit-license.org/)でリリースされており、**利用に伴って起こった問題について開発者は一切責任を負いません。当ソフトウェアの利用は自身の責任と判断で行ってください**。また、バグに遭遇した場合は[issues](https://github.com/ktoshima/sketchy/issues)までご報告ください。
 
 ## インストール方法
 ### ビルド済みのパッケージを読み込む
 Sketchyはまだalpha版の段階でブラウザ拡張機能のプラットフォームには公開していないので、現時点ではこの方法が一番簡単です。
-1. 最新版のリリースを[releass](https://github.com/ktoshima/sketchy/releases)からダウンロードし、解凍する。
-2. 各ブラウザの「ローカルファイルから拡張機能を読み込む」機能を使って、解凍した拡張機能を読み込む。現在、Firefoxのみがサポートされています。Google ChromeとSafariの追加サポートは将来のリリースを予定しています。
-	- Firefoxでのインストール方法は[ここ](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing)を参照。
+1. 最新版のリリースを[releases](https://github.com/ktoshima/sketchy/releases)からダウンロードし、解凍する。
+2. 各ブラウザの「ローカルファイルから拡張機能を読み込む」機能を使って、解凍した拡張機能を読み込む。
+	- 現在、Firefoxのみがサポートされています。 Firefoxでのインストール方法は[ここ](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing)を参照。
+	- Google ChromeとSafariの追加サポートを将来のリリースで予定しています。
 ### 自分でビルドする
 あるいは、自分でビルドすることもできます。このリポジトリをローカルにクローンした後、以下の手順に従ってください;
 1. [Node.js](https://nodejs.org/ "nodejs.org")をインストールし、以下のコマンドを実行:
