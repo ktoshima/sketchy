@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Sketchy",
-	"version": "0.1.0-alpha",
+	"version": "0.1.0",
 	"description": "Browser extension to setup slideshow from Google image search result",
 	"homepage_url": "https://github.com/ktoshima/sketchy",
 	"permissions": [

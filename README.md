@@ -1,8 +1,8 @@
 # Sketchy
 Sketchy is a simple, light, and fast browser extension that allows you to setup a slideshow from Google Image Search result for your drawing session.  
-Note that **Sketchy is still at its alpha stage, and thus likely to contain bugs and issues**. Sketchy is released under MIT license, so **use at your own discretion** and if you encounter any bugs please report to [issue](https://github.com/ktoshima/sketchy/issues).
+Note that **Sketchy is still at its alpha stage, and thus likely to contain bugs and issues**. Sketchy is released under MIT license, so **use at your own discretion** and if you encounter any bugs please report to [issues](https://github.com/ktoshima/sketchy/issues).
 
-For Japanese readme, refer to readme-jp.md. 日本語の説明はreadme-jp.mdを参照のこと.
+For Japanese readme, refer to README-jp.md. 日本語の説明はREADME-jp.mdを参照のこと.
 ## How to install
 ### Load built package
 We are still working on publishing Sketchy on extension platforms. Currently this is the easiest way to install Sketchy to your browser.
