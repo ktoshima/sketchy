@@ -1,7 +1,5 @@
 @use 'base';
 
-$title-color: #D3CCC1;
-
 body {
 	min-height: 100vh;
 	background-color: base.$base;
@@ -17,7 +15,7 @@ body {
 		transform: translateY(-50%);
 		margin: auto;
 		width: 571px;
-		color: $title-color;
+		color: base.$form-color;
 
 		h1 {
 			text-align: center;
@@ -180,7 +178,7 @@ body {
 			input[type=number] {
 				width: 89px;
 				height: 100%;
-				background: $title-color;
+				background: base.$form-color;
 				border-radius: 4px;
 			}
 
