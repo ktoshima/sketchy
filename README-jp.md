@@ -4,34 +4,34 @@ SketchyはGoogle画像検索の結果からドローイングの練習のため�
 
 ## インストール方法
 ### ビルド済みのパッケージを読み込む
-Sketchyはまだalpha版の段階でブラウザ拡張機能のプラットフォームには公開していないので、現時点ではこの方法が一番簡単です。
+Sketchyはまだalpha版の段階でブラウザ拡張機能のプラットフォームには公開されていないので、現時点ではこの方法が一番簡単です。
 1. 最新版のリリースを[releases](https://github.com/ktoshima/sketchy/releases)からダウンロードし、解凍する。
 2. 各ブラウザの「ローカルファイルから拡張機能を読み込む」機能を使って、解凍した拡張機能を読み込む。
-	- 現在、Firefoxのみがサポートされています。 Firefoxでのインストール方法は[ここ](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing)を参照。
-	- Google ChromeとSafariの追加サポートを将来のリリースで予定しています。
+	- 現在、SketchyはFirefoxでのみサポートされています。 Firefoxでのインストール方法は[ここ](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing)を参照。
+	- Google ChromeとSafariでの追加サポートを将来のリリースで予定しています。
 ### 自分でビルドする
 あるいは、自分でビルドすることもできます。このリポジトリをローカルにクローンした後、以下の手順に従ってください;
-1. [Node.js](https://nodejs.org/ "nodejs.org")をインストールし、以下のコマンドを実行:
+1. [Node.js](https://nodejs.org/ "nodejs.org")をインストールし、レポジトリ内 (`package.json`があるフォルダ) で以下のコマンドを実行:
 ```bash
 npm install
 ```
-2. 上記が終わったあと、下のコマンドを実行すると、Sketchyに必要なすべてのファイルを含む`dist`フォルダが作成されます。Sketchyの大部分は[React](https://react.dev/ "react.dev")で書かれており、[webpack](https://webpack.js.org/ "webpack.js.org")を使ってコンパイルされています。ビルドコマンドは`package.json`、ビルド設定は`webpack.config.js`に記述されているので、設定をいじりたい場合はそちらを参照してください。
+2. 上記の実行後、下のコマンドを実行すると、Sketchyに必要なすべてのファイルを含む`dist`フォルダが作成されます。Sketchyの大部分は[React](https://react.dev/ "react.dev")で書かれ、[webpack](https://webpack.js.org/ "webpack.js.org")を使ってコンパイルされており、下記のビルドコマンドは`package.json`、ビルド設定は`webpack.config.js`に記述されています。ビルドに関する設定をいじりたい場合はそちらを参照してください。
 ```bash
 npm run build:prod
 ```
 
 3. `dist`フォルダを選択して拡張機能を読み込む。拡張機能をローカルファイルからブラウザに読み込む方法については、前のセクションを参照してください。
 
-## How to use
+## 使用方法
 1. google.comに行き、キーワードで検索し、画像タブを開く (現在、SketchyはGoogle画像検索にのみ対応しています)。
 2. ツールバーをクリックして、Sketchyを開く (必要に応じてツールバーにSketchyをピン留めしておく)。
-3. 下のような画面が表示されます。スライドショーのセッションを始める前に、まず、検索結果からGallery (画像のリスト) を作成する必要があります。これを行うには、Gallery Lengthを設定し、"CREATE GALLERY "ボタンをクリックします。
+3. 下のような画面が表示されます。スライドショーのセッションを始める前に、まず、検索結果からGallery (画像のリスト) を作成する必要があります。これを行うには、Gallery Lengthを設定し、"CREATE GALLERY"ボタンをクリックします。
 
 	![popup](popup.png "popup screen")
 
-	- Gallery Lengthは、検索結果からGalleryに読み込みたい画像の数で、デフォルト値は10、最大値は50です。**Gallery Lengthの数値が大きいほど、Galleryを作成するのに時間がかかります**。また、長いギャラリーを作成する場合、Gallery Lengthで設定した数の画像が検索結果に読み込まれている必要があるため、検索結果をスクロールダウンして検索結果の画像を読み込ませてください。
+	- Gallery Lengthは、検索結果からGalleryに読み込む画像の数で、デフォルト値は10、最大値は50です。**Gallery Lengthの数値が大きいほど、Galleryを作成するのに時間がかかります**。また、長いギャラリーを作成する場合、Gallery Lengthで設定した数の画像が検索結果に読み込まれている必要があるため、検索結果をスクロールダウンして検索結果の画像を読み込ませてください。
 4. Galleryの作成に成功すると、"OPEN SESSION"ボタンがアクティブになります。クリックしてスライドショーセッション用の新しいタブを開きましょう。
-5. 新しく開いたタブは以下のようになります。ここでセッションを開始する前にスライドショーの設定を変更することができます。設定後、"START SESSION"をクリックしてセッションを開始します。
+5. 新しく開いたタブは以下のようになっています。ここでセッションを開始する前にスライドショーの設定を変更することができます。設定後、"START SESSION"をクリックしてセッションを開始します。
 
 	![session-settings](session-settings.png "Session settings")
 
@@ -50,4 +50,4 @@ npm run build:prod
 	4. Sketch No.: 現在描いているスケッチのカウントを表示します。インターバル中は表示されません。
 	5. Image: ここに画像が表示されます。インターバル中は表示されません。
 
-7. スケッチのカウントが最初に設定したスケッチ数に達するか、ギャラリーの画像を一巡すると、セッション終了を知らせるメッセージが表示されます。終了後はそのタブを閉じればSketchyが終了されます。また、途中でセッションを終了したい場合、タブを閉じれば、いつでもセッションを終了することができます。
+7. スケッチのカウントが最初に設定したスケッチ数に達するか、ギャラリーの画像を一巡すると、セッション終了を知らせるメッセージが表示されます。終了後はそのタブを閉じればSketchyが終了されます。またセッションの途中でもタブを閉じれば、いつでもセッションを終了することができます。

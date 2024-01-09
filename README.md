@@ -1,13 +1,14 @@
 # Sketchy
 Sketchy is a simple, light, and fast browser extension that allows you to setup a slideshow from Google Image Search result for your drawing session.  
-Note that **Sketchy is still at its alpha stage, and thus likely to contain bugs and issues**. Sketchy is released under MIT license, so **use at your own discretion** and if you encounter any bugs please report to [issues](https://github.com/ktoshima/sketchy/issues).
+Note that **Sketchy is still at its alpha stage, and thus likely to contain bugs and issues**. Sketchy is released under [MIT license](https://mit-license.org/), so **use at your own discretion**. If you encounter any bugs please report to [issues](https://github.com/ktoshima/sketchy/issues).
 
-For Japanese readme, refer to README-jp.md. 日本語の説明はREADME-jp.mdを参照のこと.
+For Japanese readme, refer to README-jp.md. 日本語の説明は[README-jp.md](https://github.com/ktoshima/sketchy/blob/main/README-jp.md)を参照のこと.
 ## How to install
 ### Load built package
 We are still working on publishing Sketchy on extension platforms. Currently this is the easiest way to install Sketchy to your browser.
 1. Download and unzip the latest release from [releases](https://github.com/ktoshima/sketchy/releases) for your browser of choice.
-2. Use your browser's "load extension from local file" feature to load the extracted extension. Currently only Firefox is supported. Additional support for Google Chrome and Safari is planned for future releases.
+2. Use your browser's "load extension from local file" feature to load the extracted extension.
+	- Currently Sketchy is only supported for Firefox. Additional support for Google Chrome and Safari is planned for future releases.
 	- For Firefox, see [here](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing).
 ### Build yourself
 Alternatively, you can build the extension yourself. Follow the instrutions after cloning this repo to your local machine;
