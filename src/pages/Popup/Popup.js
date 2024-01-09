@@ -90,6 +90,7 @@ const Popup = () => {
 						</div>
 						<div className='buttons'>
 							<button
+								title='Create Gallery'
 								className={isCreatingGallery ? "inProgress" : ""}
 								disabled={isCreatingGallery} onClick={() => createGallery()}
 							>
@@ -102,6 +103,7 @@ const Popup = () => {
 
 							</button>
 							<button
+								title='Open Session'
 								disabled={!(gallery && gallery.length)}
 								onClick={() => {openSession();}}
 							>

@@ -40,9 +40,9 @@ const Timer = ({ queuePos, countTime }) => {
 			</div>
 			<div className="flex-auto"></div>
 			<div className="flex-initial">
-				<button id="play-toggle" className="player-btn" disabled={timeRemaining<=0} onClick={() => toggleRunning()}>
+				<button id="play-toggle" className="player-btn" title={isRunning ? "Pause" : "Play"} disabled={timeRemaining<=0} onClick={() => toggleRunning()}>
 					{isRunning ?
-						<img src={pauseIcon} alt="pause" /> : <img src={playIcon} alt="play" />
+						<img src={pauseIcon} alt="Pause" /> : <img src={playIcon} alt="Play" />
 					}
 
 				</button>

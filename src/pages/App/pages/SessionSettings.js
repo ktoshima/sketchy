@@ -84,7 +84,7 @@ const SessionSettings = () => {
 			</div>
 			<hr />
 			<div id="session-form">
-				<label className="input-title" htmlFor={sketchNumInput}>Set Number of Sketch</label>
+				<label className="input-title" htmlFor={sketchNumInput}>Number of Sketch</label>
 				<div className="input-form">
 					<input
 						id={sketchNumInput}
@@ -97,7 +97,7 @@ const SessionSettings = () => {
 					/>
 					<label className="sublabel"></label>
 				</div>
-				<label className="input-title" htmlFor={sketchTimeMinInput}>Set Sketch Time</label>
+				<label className="input-title" htmlFor={sketchTimeMinInput}>Sketch Time</label>
 				<div className="input-form">
 					<input
 						id={sketchTimeMinInput}
@@ -120,7 +120,7 @@ const SessionSettings = () => {
 					/>
 					<label className="sublabel" htmlFor={sketchTimeSecInput}>s</label>
 				</div>
-				<label className="input-title" htmlFor={intervalInput}>Set interval</label>
+				<label className="input-title" htmlFor={intervalInput}>Interval b/w Sketch</label>
 				<div className="input-form">
 					<input
 						id={intervalInput}
@@ -148,7 +148,7 @@ const SessionSettings = () => {
 					<label className="switch-label" htmlFor={shuffleButton}>Shuffle Images</label>
 				</div>
 			</div>
-			<button onClick={() => handleStartSession()}>START SESSION</button>
+			<button title="Start Session" onClick={() => handleStartSession()}>START SESSION</button>
 			{ Boolean(error.length) && error.map((e) =>(<div className="error"> { e } </div>)) }
 		</div>
 	)

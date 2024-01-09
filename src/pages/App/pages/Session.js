@@ -81,7 +81,7 @@ const Session = () => {
 				{ countTime && <Timer queuePos={queuePos.current} countTime={countTime} /> }
 				<div className="flex-btn-space"></div>
 				{ !isFinished && <div className="flex-initial">
-					<button id="skip" className="player-btn" onClick={() => skip()}>
+					<button id="skip" className="player-btn" title="Skip" onClick={() => skip()}>
 						<img src={skipIcon} alt="skip" />
 					</button>
 				</div>}
