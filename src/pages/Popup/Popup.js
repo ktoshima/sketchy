@@ -25,8 +25,10 @@ const Popup = () => {
 				if (currentTab.current.url) {
 					const currentURL = new URL(currentTab.current.url);
 					if (currentURL.searchParams.get('tbm') === 'isch') {
+						// will render gallery creation menu
 						setTabURL(currentURL);
 					} else {
+						// will render invalid url alert
 						setInvalidURL(true);
 					}
 				}
@@ -35,8 +37,7 @@ const Popup = () => {
 
 	const createGallery = () => {
 		setIsCreatingGallery(true);
-		// initiate gallery creation by sending a message to content script
-		// sending message to content script is only supported through tabs.sendMessage
+		// if user manages to input galleryLen > 50, cap it at 50
 		let sendMaxGalleryLen;
 		if (maxGalleryLen > 50) {
 			setMaxGalleryLen(50);
@@ -44,6 +45,8 @@ const Popup = () => {
 		} else {
 			sendMaxGalleryLen = maxGalleryLen;
 		}
+		// initiate gallery creation by sending a message to content script
+		// sending message to content script is only supported through tabs.sendMessage
 		browser.tabs.sendMessage(
 			currentTab.current.id,
 			{
@@ -63,9 +66,8 @@ const Popup = () => {
 			type: "open_session",
 			image_query: tabURL.searchParams.get('q'),
 			gallery: gallery
-		}).then((response) => {
-			console.log(response);
-			// close popup
+		}).then((_response) => {
+			// close popup after response from background script
 			window.close();
 		});
 	};
