@@ -13,6 +13,7 @@
 	},
 	"background": {
 		"scripts": ["background.bundle.js"],
+		"service_worker": "background.bundle.js",
 		"type": "module"
 	},
 	"content_scripts": [
