@@ -30,9 +30,10 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "build:dev": "webpack --mode development --config webpack.config.js; webpack --mode development --config webpack.config.chrome.js",
+    "build:dev": "rm -r dist/; webpack --mode development --config webpack.config.js; webpack --mode development --config webpack.config.chrome.js",
     "build:dev:firefox": "webpack --mode development --config webpack.config.js",
     "build:dev:chrome": "webpack --mode development --config webpack.config.chrome.js",
+    "build:prod": "rm -r dist/; webpack --mode production --config webpack.config.js; webpack --mode production --config webpack.config.chrome.js",
     "build:prod:firefox": "webpack --mode production --config webpack.config.js",
     "build:prod:chrome": "webpack --mode production --config webpack.config.chrome.js"
   },
