@@ -63,9 +63,11 @@ const Popup = () => {
 			type: "open_session",
 			image_query: tabURL.searchParams.get('q'),
 			gallery: gallery
+		}).then((response) => {
+			console.log(response);
+			// close popup
+			window.close();
 		});
-		// close popup
-		window.close();
 	};
 
 
