@@ -11,7 +11,7 @@ const config = {
 		contentScript: './src/contentScript/contentScript.js',
 	},
 	output: {
-		path: path.resolve(__dirname, 'dist', 'firefox'),
+		path: path.resolve(__dirname, 'dist', 'chrome'),
 		filename: '[name].bundle.js',
 	},
 	module: {
@@ -47,8 +47,8 @@ const config = {
 		new CopyPlugin({
 			patterns: [
 				{
-					from: './src/manifest.json',
-					to: path.join(__dirname, 'dist', 'firefox', 'manifest.json')
+					from: './src/manifest-chrome.json',
+					to: path.join(__dirname, 'dist', 'chrome', 'manifest.json')
 				},
 			]
 		}),
