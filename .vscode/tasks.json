@@ -3,25 +3,25 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "build:prod",
+			"script": "build:prod:firefox",
 			"group": {
 				"kind": "build",
 				"isDefault": false
 			},
 			"problemMatcher": [],
-			"label": "npm: build:prod",
-			"detail": "react-scripts build:prod"
+			"label": "npm: build:prod:firefox",
+			"detail": "react-scripts build:prod:firefox"
 		},
 		{
 			"type": "npm",
-			"script": "build:dev",
+			"script": "build:dev:firefox",
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			},
 			"problemMatcher": [],
-			"label": "npm: build:dev",
-			"detail": "react-scripts build:dev"
+			"label": "npm: build:dev:firefox",
+			"detail": "react-scripts build:dev:firefox"
 		}
 	]
 }

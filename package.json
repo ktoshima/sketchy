@@ -30,8 +30,12 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "build:dev": "[ -d dist/ ] && rm -r dist/; webpack --mode development --config webpack.config.js; webpack --mode development --config chrome.webpack.config.js",
-    "build:prod": "[ -d dist/ ] && rm -r dist/; webpack --mode production --config webpack.config.js; webpack --mode production --config chrome.webpack.config.js"
+    "build:dev": "[ -d dist/ ] && rm -r dist/; npm run build:dev:firefox; npm run build:dev:chrome",
+    "build:dev:firefox": "webpack --mode development --env browser=firefox --config webpack.config.js",
+    "build:dev:chrome": "webpack --mode development --env browser=chrome --config webpack.config.js",
+    "build:prod": "[ -d dist/ ] && rm -r dist/; npm run build:prod:firefox; npm run build:prod:chrome",
+    "build:prod:firefox": "webpack --mode production --env browser=firefox --config webpack.config.js",
+    "build:prod:chrome": "webpack --mode production --env browser=chrome --config webpack.config.js"
   },
   "eslintConfig": {
     "extends": [
