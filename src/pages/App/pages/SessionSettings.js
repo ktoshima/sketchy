@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 // import context
 import { useSessionContext } from "../hooks/useSessionContext";
 
+const browser = require("webextension-polyfill");
+
 const SessionSettings = () => {
 	const {
 		gallery, galleryDispatch,

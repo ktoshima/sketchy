@@ -1,3 +1,5 @@
+const browser = require("webextension-polyfill");
+
 const clickPromise = (htmlElement, timeout) => {
 	return new Promise((resolve) => {
 		setTimeout(() => {

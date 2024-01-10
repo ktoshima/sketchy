@@ -6,6 +6,8 @@ import CreateGalleryIconDark from '../../assets/images/create_gallery-icon-base.
 import OpenSessionIconLight from '../../assets/images/open_session-icon-primary.svg';
 import OpenSessionIconDark from '../../assets/images/open_session-icon-base.svg';
 
+const browser = require("webextension-polyfill");
+
 const Popup = () => {
 	const currentTab = useRef(null);
 	const [tabURL, setTabURL] = useState(null);
