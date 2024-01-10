@@ -16,7 +16,7 @@ const Popup = () => {
 
 	// run only once initialized
 	useEffect(() => {
-		// get current tab id and URL, decide if URL is google image search
+		// get current tab id and URL, decide if URL contains flag for google image search (tbm=isch)
 		browser.tabs.query({active: true, currentWindow: true})
 			.then((tabArray) => {
 				currentTab.current = tabArray[0];
@@ -35,7 +35,6 @@ const Popup = () => {
 		setIsCreatingGallery(true);
 		// initiate gallery creation by sending a message to content script
 		// sending message to content script is only supported through tabs.sendMessage
-		console.log(maxGalleryLen);
 		let sendMaxGalleryLen;
 		if (maxGalleryLen > 50) {
 			setMaxGalleryLen(50);
@@ -63,6 +62,7 @@ const Popup = () => {
 			image_query: tabURL.searchParams.get('q'),
 			gallery: gallery
 		});
+		// close popup
 		window.close();
 	};
 
