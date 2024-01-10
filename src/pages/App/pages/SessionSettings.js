@@ -23,7 +23,7 @@ const SessionSettings = () => {
 	const [error, setError] = useState([]);
 	const navigate = useNavigate();
 
-	// request gallery when initialized
+	// request gallery from background script when initialized
 	useEffect(() => {
 		const requestGallery = () => {
 			browser.runtime.sendMessage({
