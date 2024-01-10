@@ -10,10 +10,6 @@ const config = {
 		background: './src/background/background.js',
 		contentScript: './src/contentScript/contentScript.js',
 	},
-	output: {
-		path: path.resolve(__dirname, 'dist', 'firefox'),
-		filename: '[name].bundle.js',
-	},
 	module: {
 		rules: [
 			{
@@ -44,14 +40,6 @@ const config = {
 		]
 	},
 	plugins: [
-		new CopyPlugin({
-			patterns: [
-				{
-					from: './src/manifest.json',
-					to: path.join(__dirname, 'dist', 'firefox', 'manifest.json')
-				},
-			]
-		}),
 		new HtmlWebpackPlugin({
 			template: './src/pages/Popup/index.html',
 			filename: 'popup.html',
@@ -67,7 +55,35 @@ const config = {
 	],
 };
 
-module.exports = (_env, argv) => {
+module.exports = (env, argv) => {
+	config.output = {
+		path: path.resolve(__dirname, 'dist', env.browser),
+		filename: '[name].bundle.js',
+	}
+	// until chrome 121 rolls out, separate manifest file is neccesary to avoid Chrome refusing to load manifest with background.scripts
+	if (env.browser === 'firefox') {
+		config.plugins.push(
+			new CopyPlugin({
+				patterns: [
+					{
+						from: './src/manifest.json',
+						to: path.join(__dirname, 'dist', env.browser, 'manifest.json')
+					},
+				]
+			})
+		)
+	} else if (env.browser === 'chrome') {
+		config.plugins.push(
+			new CopyPlugin({
+				patterns: [
+					{
+						from: './src/manifest-chrome.json',
+						to: path.join(__dirname, 'dist', env.browser, 'manifest.json')
+					},
+				]
+			})
+		)
+	}
 	// compile mode config
 	if (argv.mode === 'development') {
 		config.devtool = 'inline-source-map';
