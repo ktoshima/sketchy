@@ -14,7 +14,7 @@ body {
 		top: calc(100vh*0.5);
 		transform: translateY(-50%);
 		margin: auto;
-		width: 571px;
+		width: min(571px, calc(100% - 160px));
 		color: base.$form-color;
 		display: flex;
 		flex-direction: column;
@@ -186,8 +186,6 @@ body {
 			font-size: 20px;
 			width: 233px;
 			height: 47px;
-			left: 0;
-			top: 0;
 			margin: 0 auto;
 			display: block;
 		}
