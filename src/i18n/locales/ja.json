@@ -19,9 +19,11 @@
 		"start_session": "セッションを開始"
 	},
 	"session" : {
-		"get_ready": "準備はいい？",
-		"interval": "インターバル",
-		"final_message": "お疲れさま！タブを閉じて終了しましょう。",
+		"viewer_message": {
+			"get_ready": "準備はいい？",
+			"interval": "インターバル",
+			"final_message": "お疲れさま！タブを閉じて終了しましょう。"
+		},
 		"play": "再生",
 		"pause": "一時停止",
 		"skip": "スキップ"
