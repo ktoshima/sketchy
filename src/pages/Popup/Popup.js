@@ -1,4 +1,5 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Background from './components/Background';
 import UrlAlert from './components/UrlAlert';
 import CreateGalleryIconLight from '../../assets/images/create_gallery-icon-primary.svg';
@@ -75,6 +76,7 @@ const Popup = () => {
 
 	const galleryLengthInput = useId();
 
+	const { t, i18n } = useTranslation();
 
 	return (
 		<>
@@ -83,7 +85,7 @@ const Popup = () => {
 				{ tabURL && (
 					<>
 						<div className="setting">
-							<label htmlFor={galleryLengthInput}>Gallery Length</label>
+							<label htmlFor={galleryLengthInput}>{t("common.gallery_length")}</label>
 							<input
 								id={galleryLengthInput}
 								type="number"
@@ -96,7 +98,7 @@ const Popup = () => {
 						</div>
 						<div className='buttons'>
 							<button
-								title='Create Gallery'
+								title={t("popup.create_gallery")}
 								className={isCreatingGallery ? "inProgress" : ""}
 								disabled={isCreatingGallery} onClick={() => createGallery()}
 							>
@@ -104,12 +106,12 @@ const Popup = () => {
 									<img src={
 										isCreatingGallery ? CreateGalleryIconDark : CreateGalleryIconLight
 										} alt="" />
-									<span>CREATE GALLERY</span>
+									<span>{t("popup.create_gallery").toUpperCase()}</span>
 								</div>
 
 							</button>
 							<button
-								title='Open Session'
+								title={t("popup.open_session")}
 								disabled={!(gallery && gallery.length)}
 								onClick={() => {openSession();}}
 							>
@@ -117,14 +119,14 @@ const Popup = () => {
 									<img src={
 										!(gallery && gallery.length) ? OpenSessionIconDark : OpenSessionIconLight
 									} alt="" />
-									<span>OPEN SESSION</span>
+									<span>{t("popup.open_session").toUpperCase()}</span>
 								</div>
 							</button>
 						</div>
 					</>
 				) }
 				{ invalidURL && (
-					<UrlAlert />
+					<UrlAlert alertText={t("popup.url_alert_text")} />
 				) }
 			</div>
 			<Background />

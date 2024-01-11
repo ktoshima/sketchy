@@ -5,7 +5,7 @@ import { useSessionContext } from "../hooks/useSessionContext"
 import pauseIcon from '../../../assets/images/pause.svg';
 import playIcon from '../../../assets/images/play.svg';
 
-const Timer = ({ queuePos, countTime }) => {
+const Timer = ({ queuePos, countTime, text }) => {
 
 	const {
 		isFinished,
@@ -40,9 +40,9 @@ const Timer = ({ queuePos, countTime }) => {
 			</div>
 			<div className="flex-auto"></div>
 			<div className="flex-initial">
-				<button id="play-toggle" className="player-btn" title={isRunning ? "Pause" : "Play"} disabled={timeRemaining<=0} onClick={() => toggleRunning()}>
+				<button id="play-toggle" className="player-btn" title={isRunning ? text.pause : text.play} disabled={timeRemaining<=0} onClick={() => toggleRunning()}>
 					{isRunning ?
-						<img src={pauseIcon} alt="Pause" /> : <img src={playIcon} alt="Play" />
+						<img src={pauseIcon} alt={text.pause} /> : <img src={playIcon} alt={text.play} />
 					}
 
 				</button>

@@ -1,9 +1,9 @@
 import AlertIcon from '../../../assets/images/url_alert.svg';
 
-const UrlAlert = () => (
+const UrlAlert = ({alertText}) => (
 	<div className="url-alert">
 		<img src={AlertIcon} alt="" />
-		<div>Sketchy is not compatible with current URL</div>
+		<div>{ alertText }</div>
 	</div>
 );
 
