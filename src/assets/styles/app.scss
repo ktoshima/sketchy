@@ -21,7 +21,7 @@ body {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: min(610px, 80vh);
+		height: min(610px, 90vh);
 		align-items: center;
 
 		h1 {
@@ -34,18 +34,24 @@ body {
 			height: 80%;
 			display: flex;
 			flex-direction: column;
-			justify-content: space-evenly;
+			justify-content: space-around;
 
 			#session-info {
+				$row-info-height: 24px;
+				align-items: center;
+				height: 20%;
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
-				grid-template-rows: repeat(2, 1fr);
-				row-gap: 40px;
+				grid-template-rows: repeat(2, $row-info-height);
 				line-height: 100%;
 				font-size: 28px;
+				align-content: space-between;
 
+				.info-title {
+					justify-self: left;
+				}
 				.info-item {
-					text-align: right;
+					justify-self: right;
 					color: base.$secondary;
 				}
 			}
@@ -62,11 +68,12 @@ body {
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
 				grid-template-rows: repeat(4, $row-form-height);
-				row-gap: 40px;
+				align-content: space-between;
+				height: 50%;
 
 				.input-title {
 					line-height: $row-form-height;
-					font-size: 28px;
+					font-size: 24px;
 					justify-self: left;
 				}
 
