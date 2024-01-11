@@ -73,70 +73,67 @@ const SessionSettings = () => {
 
 	return (
 		<div id="session-settings">
-			<h1>Session Settings</h1>
-			<div id="session-info">
-				<div className="session-info_row">
-					<div className="session-info_row_title">Image Query</div>
-					<div className="session-info_row_item">{imageQuery}</div>
+			<h1 id="session-settings-title">Session Settings</h1>
+			<div id="session-settings-body">
+				<div id="session-info">
+					<div className="info-title">Image Query</div>
+					<div className="info-item">{imageQuery}</div>
+					<div className="info-title">Gallery Length</div>
+					<div className="info-item">{gallery ? gallery.length : 0}</div>
 				</div>
-				<div className="session-info_row">
-					<div className="session-info_row_title">Gallery Length</div>
-					<div className="session-info_row_item">{gallery ? gallery.length : 0}</div>
-				</div>
-			</div>
-			<hr />
-			<div id="session-form">
-				<label className="input-title" htmlFor={sketchNumInput}>Number of Sketch</label>
-				<div className="input-form">
-					<input
-						id={sketchNumInput}
-						type="number"
-						step="1"
-						min="1"
-						onChange={(e) => setSketchNum(Number(e.target.value))}
-						value={sketchNum}
-						className={emptyFields.includes('sketchNum') ? 'error' : ''}
-					/>
-					<label className="sublabel"></label>
-				</div>
-				<label className="input-title" htmlFor={sketchTimeMinInput}>Sketch Time</label>
-				<div className="input-form">
-					<input
-						id={sketchTimeMinInput}
-						type="number"
-						step="1"
-						min="0"
-						onChange={(e) => setMinute(Number(e.target.value))}
-						value={minute}
-						className={emptyFields.includes('sketchTime') ? 'error' : ''}
-					/>
-					<label className="sublabel" htmlFor={sketchTimeMinInput}>m</label>
-					<input
-						id={sketchTimeSecInput}
-						type="number"
-						step="1"
-						min="0"
-						onChange={(e) => setSecond(Number(e.target.value))}
-						value={second}
-						className={emptyFields.includes('sketchTime') ? 'error' : ''}
-					/>
-					<label className="sublabel" htmlFor={sketchTimeSecInput}>s</label>
-				</div>
-				<label className="input-title" htmlFor={intervalInput}>Interval b/w Sketch</label>
-				<div className="input-form">
-					<input
-						id={intervalInput}
-						type="number"
-						step="1"
-						min="0"
-						onChange={(e) => setInterval(Number(e.target.value))}
-						value={interval}
-						className={emptyFields.includes('interval') ? 'error' : ''}
-					/>
-					<label className="sublabel" htmlFor={intervalInput}>s</label>
-				</div>
-				<div className="switch-row">
-					<div className="switch">
+				<hr />
+				<div id="session-form">
+					<label className="input-title" htmlFor={sketchNumInput}>Number of Sketch</label>
+					<div className="input-form">
+						<input
+							id={sketchNumInput}
+							type="number"
+							step="1"
+							min="1"
+							onChange={(e) => setSketchNum(Number(e.target.value))}
+							value={sketchNum}
+							className={emptyFields.includes('sketchNum') ? 'error' : ''}
+						/>
+						<label className="sublabel"></label>
+					</div>
+					<label className="input-title" htmlFor={sketchTimeMinInput}>Sketch Time</label>
+					<div className="input-form">
+						<input
+							id={sketchTimeMinInput}
+							type="number"
+							step="1"
+							min="0"
+							onChange={(e) => setMinute(Number(e.target.value))}
+							value={minute}
+							className={emptyFields.includes('sketchTime') ? 'error' : ''}
+						/>
+						<label className="sublabel" htmlFor={sketchTimeMinInput}>m</label>
+						<input
+							id={sketchTimeSecInput}
+							type="number"
+							step="1"
+							min="0"
+							onChange={(e) => setSecond(Number(e.target.value))}
+							value={second}
+							className={emptyFields.includes('sketchTime') ? 'error' : ''}
+						/>
+						<label className="sublabel" htmlFor={sketchTimeSecInput}>s</label>
+					</div>
+					<label className="input-title" htmlFor={intervalInput}>Interval b/w Sketch</label>
+					<div className="input-form">
+						<input
+							id={intervalInput}
+							type="number"
+							step="1"
+							min="0"
+							onChange={(e) => setInterval(Number(e.target.value))}
+							value={interval}
+							className={emptyFields.includes('interval') ? 'error' : ''}
+						/>
+						<label className="sublabel" htmlFor={intervalInput}>s</label>
+					</div>
+					<label className="input-title switch-label" htmlFor={shuffleButton}>Shuffle Images</label>
+					<div className="switch input-form">
 						<label className="toggle" htmlFor={shuffleButton}>
 							<input
 								id={shuffleButton}
@@ -146,11 +143,11 @@ const SessionSettings = () => {
 							/>
 							<span className="slider"></span>
 						</label>
+						<label className="sublabel"></label>
 					</div>
-					<label className="switch-label" htmlFor={shuffleButton}>Shuffle Images</label>
 				</div>
 			</div>
-			<button title="Start Session" onClick={() => handleStartSession()}>START SESSION</button>
+			<button id="session-settings-button" title="Start Session" onClick={() => handleStartSession()}>START SESSION</button>
 			{ Boolean(error.length) && error.map((e) =>(<div className="error"> { e } </div>)) }
 		</div>
 	)
