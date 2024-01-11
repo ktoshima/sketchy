@@ -14,11 +14,16 @@
 		"sketch_time": "Sketch Time",
 		"minute": "m",
 		"second": "s",
-		"interval": "Interval",
+		"interval_bw_sketch": "Interval b/w Sketch",
 		"shuffle_images": "Shuffle Images",
 		"start_session": "Start Session"
 	},
 	"session" : {
+		"viewer_message": {
+			"get_ready": "Get ready",
+			"interval": "Interval",
+			"final_message": "Finished! You can close this tab."
+		},
 		"play": "Play",
 		"pause": "Pause",
 		"skip": "Skip"
