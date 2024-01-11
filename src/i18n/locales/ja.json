@@ -1,0 +1,26 @@
+{
+	"common": {
+		"gallery_length": "ギャラリーの長さ"
+	},
+	"popup": {
+		"create_gallery": "ギャラリーの作成",
+		"open_session": "セッションを開く",
+		"url_alert_text": "Sketchyはこのタブでは使えません"
+	},
+	"session_settings": {
+		"session_settings": "セッションの設定",
+		"image_query": "検索クエリ",
+		"number_of_sketch": "スケッチ数",
+		"sketch_time": "スケッチの時間",
+		"minute": "分",
+		"second": "秒",
+		"interval": "インターバル",
+		"shuffle_images": "画像の順番をシャッフル",
+		"start_session": "セッションを開始"
+	},
+	"session" : {
+		"play": "再生",
+		"pause": "一時停止",
+		"skip": "スキップ"
+	}
+}

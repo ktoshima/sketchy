@@ -1,0 +1,26 @@
+{
+	"common": {
+		"gallery_length": "Gallery Length"
+	},
+	"popup": {
+		"create_gallery": "Create Gallery",
+		"open_session": "Open Session",
+		"url_alert_text": "Sketchy is not compatible with current URL"
+	},
+	"session_settings": {
+		"session_settings": "Session Settings",
+		"image_query": "Image Query",
+		"number_of_sketch": "Number of Sketch",
+		"sketch_time": "Sketch Time",
+		"minute": "m",
+		"second": "s",
+		"interval": "Interval",
+		"shuffle_images": "Shuffle Images",
+		"start_session": "Start Session"
+	},
+	"session" : {
+		"play": "Play",
+		"pause": "Pause",
+		"skip": "Skip"
+	}
+}
