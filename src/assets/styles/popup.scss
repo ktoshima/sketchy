@@ -101,11 +101,19 @@ body {
 				line-height: 24px;
 				word-wrap: break-word;
 				text-align: center;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				row-gap: 12px;
 
 				img {
 					width: 56px;
 					height: 56px;
-					margin-bottom: 5px;
+				}
+
+				div {
+					margin: 0;
+					padding: 0;
 				}
 
 			}
