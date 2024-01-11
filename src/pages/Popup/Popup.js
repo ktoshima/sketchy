@@ -6,6 +6,8 @@ import CreateGalleryIconDark from '../../assets/images/create_gallery-icon-base.
 import OpenSessionIconLight from '../../assets/images/open_session-icon-primary.svg';
 import OpenSessionIconDark from '../../assets/images/open_session-icon-base.svg';
 
+const browser = require("webextension-polyfill");
+
 const Popup = () => {
 	const currentTab = useRef(null);
 	const [tabURL, setTabURL] = useState(null);
@@ -16,15 +18,17 @@ const Popup = () => {
 
 	// run only once initialized
 	useEffect(() => {
-		// get current tab id and URL, decide if URL is google image search
+		// get current tab id and URL, decide if URL contains flag for google image search (tbm=isch)
 		browser.tabs.query({active: true, currentWindow: true})
 			.then((tabArray) => {
 				currentTab.current = tabArray[0];
 				if (currentTab.current.url) {
 					const currentURL = new URL(currentTab.current.url);
 					if (currentURL.searchParams.get('tbm') === 'isch') {
+						// will render gallery creation menu
 						setTabURL(currentURL);
 					} else {
+						// will render invalid url alert
 						setInvalidURL(true);
 					}
 				}
@@ -33,9 +37,7 @@ const Popup = () => {
 
 	const createGallery = () => {
 		setIsCreatingGallery(true);
-		// initiate gallery creation by sending a message to content script
-		// sending message to content script is only supported through tabs.sendMessage
-		console.log(maxGalleryLen);
+		// if user manages to input galleryLen > 50, cap it at 50
 		let sendMaxGalleryLen;
 		if (maxGalleryLen > 50) {
 			setMaxGalleryLen(50);
@@ -43,6 +45,8 @@ const Popup = () => {
 		} else {
 			sendMaxGalleryLen = maxGalleryLen;
 		}
+		// initiate gallery creation by sending a message to content script
+		// sending message to content script is only supported through tabs.sendMessage
 		browser.tabs.sendMessage(
 			currentTab.current.id,
 			{
@@ -62,8 +66,10 @@ const Popup = () => {
 			type: "open_session",
 			image_query: tabURL.searchParams.get('q'),
 			gallery: gallery
+		}).then((_response) => {
+			// close popup after response from background script
+			window.close();
 		});
-		window.close();
 	};
 
 

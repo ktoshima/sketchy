@@ -10,10 +10,6 @@ const config = {
 		background: './src/background/background.js',
 		contentScript: './src/contentScript/contentScript.js',
 	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].bundle.js',
-	},
 	module: {
 		rules: [
 			{
@@ -44,14 +40,6 @@ const config = {
 		]
 	},
 	plugins: [
-		new CopyPlugin({
-			patterns: [
-				{
-					from: './src/manifest.json',
-					to: path.join(__dirname, 'dist')
-				},
-			]
-		}),
 		new HtmlWebpackPlugin({
 			template: './src/pages/Popup/index.html',
 			filename: 'popup.html',
@@ -67,7 +55,41 @@ const config = {
 	],
 };
 
-module.exports = (_env, argv) => {
+module.exports = (env, argv) => {
+	config.output = {
+		path: path.resolve(__dirname, 'dist', env.browser),
+		filename: '[name].bundle.js',
+	}
+
+	// browser type config
+	// until chrome 121 rolls out, separate manifest file is neccesary to avoid Chrome refusing to load manifest with background.scripts
+	// latest version of Firefox and Safari supports both bachground.scripts and background.service_worker being in manifest.json
+	if (env.browser === 'chrome') {
+		config.plugins.push(
+			new CopyPlugin({
+				patterns: [
+					{
+						from: './src/manifest-chrome.json',
+						to: path.join(__dirname, 'dist', env.browser, 'manifest.json')
+					},
+				]
+			})
+		)
+	} else  {
+		config.plugins.push(
+			new CopyPlugin({
+				patterns: [
+					{
+						from: './src/manifest.json',
+						to: path.join(__dirname, 'dist', env.browser, 'manifest.json')
+					},
+				]
+			})
+		)
+	}
+	// compile mode config
+	// use inline-source-map in development mode for debug purpose
+	// use MiniCssExtractPluging in production mode to separate css files for optimization
 	if (argv.mode === 'development') {
 		config.devtool = 'inline-source-map';
 		config.module.rules.push(
@@ -80,8 +102,7 @@ module.exports = (_env, argv) => {
 				],
 			}
 		)
-	}
-	if (argv.mode === 'production') {
+	} else if (argv.mode === 'production') {
 		config.plugins.push(new MiniCssExtractPlugin());
 		config.module.rules.push(
 			{

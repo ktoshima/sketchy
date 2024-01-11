@@ -1,3 +1,5 @@
+const browser = require("webextension-polyfill");
+
 let image_query = "";
 let gallery = [];
 

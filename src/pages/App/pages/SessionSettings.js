@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 // import context
 import { useSessionContext } from "../hooks/useSessionContext";
 
+const browser = require("webextension-polyfill");
+
 const SessionSettings = () => {
 	const {
 		gallery, galleryDispatch,
@@ -21,7 +23,7 @@ const SessionSettings = () => {
 	const [error, setError] = useState([]);
 	const navigate = useNavigate();
 
-	// request gallery when initialized
+	// request gallery from background script when initialized
 	useEffect(() => {
 		const requestGallery = () => {
 			browser.runtime.sendMessage({
