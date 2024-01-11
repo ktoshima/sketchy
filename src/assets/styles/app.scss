@@ -6,6 +6,8 @@ body {
 	position: relative;
 	overflow: hidden;
 
+	$session-margin: 80px;
+
 	#session-settings {
 
 		position: absolute;
@@ -14,7 +16,7 @@ body {
 		top: calc(100vh*0.5);
 		transform: translateY(-50%);
 		margin: auto;
-		width: min(571px, calc(100% - 160px));
+		width: min(571px, calc(100% - 2*$session-margin));
 		color: base.$form-color;
 		display: flex;
 		flex-direction: column;
@@ -194,7 +196,6 @@ body {
 
 
 	#session {
-		$session-margin: 80px;
 
 		margin: 0 $session-margin;
 
