@@ -14,7 +14,7 @@
 		"sketch_time": "スケッチの時間",
 		"minute": "分",
 		"second": "秒",
-		"interval": "スケッチ間のインターバル",
+		"interval_bw_sketch": "スケッチ間のインターバル",
 		"shuffle_images": "画像の順番をシャッフル",
 		"start_session": "セッションを開始"
 	},
