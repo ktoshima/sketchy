@@ -1,16 +1,18 @@
 // _base.scss
 
+@use 'colors' as c;
+
 $font-family: 'NTR';
 $font-family-jp: 'Noto Sans JP';
 $font-weight: 400;
-$base: #4C4C4C;
-$primary: #F4F0E5;
-$primary-dark: #C6C6C5;
-$secondary: #A7A19B;
-$secondary-dark: #938B83;
-$form-color: #D3CCC1;
-$accent: #D44C45;
-$accent-dark: #BE3A33;
+// $base: #4C4C4C;
+// $primary: #F4F0E5;
+// $primary-dark: #C6C6C5;
+// $secondary: #A7A19B;
+// $secondary-dark: #938B83;
+// $form-color: #D3CCC1;
+// $accent: #D44C45;
+// $accent-dark: #BE3A33;
 
 * {
 	box-sizing: border-box;
@@ -21,31 +23,27 @@ $accent-dark: #BE3A33;
 	font-weight: $font-weight;
 }
 
-body {
+button {
+	background-color: c.$accent;
+	color: c.$primary;
+	border: none;
+	border-radius: 200px;
+	cursor: pointer;
 
-	button {
-		background-color: $accent;
-		color: $primary;
-		border: none;
-		border-radius: 200px;
-		cursor: pointer;
+	&:hover {
+		background-color: c.$accent-dark;
+		transition: 0.1s;
+	}
 
-		&:hover {
-			background-color: $accent-dark;
-			transition: 0.1s;
-		}
+	&:disabled {
+		background-color: c.$secondary;
+		color: c.$base;
+		cursor: not-allowed;
+	}
 
-		&:disabled {
-			background-color: $secondary;
-			color: $base;
-			cursor: not-allowed;
-		}
-
-		&:disabled:hover {
-			background-color: $secondary-dark;
-			transition: 0.1s;
-		}
-
+	&:disabled:hover {
+		background-color: c.$secondary-dark;
+		transition: 0.1s;
 	}
 
 }

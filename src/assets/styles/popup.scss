@@ -1,11 +1,12 @@
 @use 'base';
+@use 'colors' as c;
 
 body {
 	max-width: 226px;
 	min-width: 226px;
 	max-height: 220px;
 	min-height: 220px;
-	background-color: base.$primary;
+	background-color: c.$primary;
 	position: relative;
 
 	#root {
@@ -24,7 +25,7 @@ body {
 			position: absolute;
 			left: 132px;
 			top: 34px;
-			color: base.$primary;
+			color: c.$primary;
 			font-family: Simonetta;
 			font-size: 24px;
 			line-height: 24px;
@@ -49,7 +50,7 @@ body {
 					padding: 0;
 					font-size: 18px;
 					line-height: 20px;
-					color: base.$form-color;
+					color: c.$form-color;
 				}
 
 				input[type=number] {
@@ -61,8 +62,8 @@ body {
 					line-height: 20px;
 					border-radius: 4px;
 					border: none;
-					color: base.$base;
-					background-color: base.$form-color;
+					color: c.$base;
+					background-color: c.$form-color;
 				}
 			}
 			.buttons {
@@ -96,7 +97,7 @@ body {
 
 			.url-alert {
 				width: 100%;
-				color: base.$primary;
+				color: c.$primary;
 				font-size: 18px;
 				line-height: 24px;
 				word-wrap: break-word;
