@@ -12,7 +12,7 @@ i18n
 		// fallbackLng: 'en',
 
 		// default language for debug purpose
-		lng: 'en',
+		lng: 'en-US',
 		// lng: 'ja',
 
 		returnEmptyString: false,

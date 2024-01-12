@@ -1,18 +1,14 @@
 // _base.scss
 
+// load colors
 @use 'colors' as c;
+
+// load fonts
+@import url('https://fonts.googleapis.com/css2?family=NTR&family=Noto+Sans+JP&family=Simonetta&display=swap');
 
 $font-family: 'NTR';
 $font-family-jp: 'Noto Sans JP';
 $font-weight: 400;
-// $base: #4C4C4C;
-// $primary: #F4F0E5;
-// $primary-dark: #C6C6C5;
-// $secondary: #A7A19B;
-// $secondary-dark: #938B83;
-// $form-color: #D3CCC1;
-// $accent: #D44C45;
-// $accent-dark: #BE3A33;
 
 * {
 	box-sizing: border-box;

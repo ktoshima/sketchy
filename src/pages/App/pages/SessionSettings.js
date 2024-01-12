@@ -72,11 +72,11 @@ const SessionSettings = () => {
 	const intervalInput = useId();
 	const shuffleButton = useId();
 
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
 	return (
 		<div id="session-settings">
-			<h1 id="session-settings-title">Session Settings</h1>
+			<h1 id="session-settings-title">{t("session_settings.session_settings")}</h1>
 			<div id="session-settings-body">
 				<div id="session-info">
 					<div className="info-title">{t("session_settings.image_query")}</div>
