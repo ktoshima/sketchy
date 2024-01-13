@@ -1,13 +1,13 @@
 @use 'base';
 @use 'colors' as c;
 
+$session-margin: 80px;
+
 body {
 	min-height: 100vh;
 	background-color: c.$base;
 	position: relative;
 	overflow: hidden;
-
-	$session-margin: 80px;
 
 	#session-settings {
 

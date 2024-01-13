@@ -12,8 +12,8 @@ i18n
 		// fallbackLng: 'en',
 
 		// default language for debug purpose
-		lng: 'en-US',
-		// lng: 'ja',
+		// lng: 'en',
+		lng: 'ja',
 
 		returnEmptyString: false,
 		resources: {

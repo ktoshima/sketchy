@@ -4,19 +4,19 @@
 @use 'colors' as c;
 
 // load fonts
-@import url('https://fonts.googleapis.com/css2?family=NTR&family=Noto+Sans+JP&family=Simonetta&display=swap');
-
-$font-family: 'NTR';
-$font-family-jp: 'Noto Sans JP';
-$font-weight: 400;
+@use 'fonts' as f;
 
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	border: none;
-	font-family: $font-family, $font-family-jp, sans-serif;
-	font-weight: $font-weight;
+	font-family: f.$font-family, f.$font-family-jp, sans-serif;
+	font-weight: f.$font-weight;
+}
+
+:lang(ja) {
+	font-size: 80%;
 }
 
 button {
