@@ -1,12 +1,13 @@
 @use 'base';
+@use 'colors' as c;
+
+$session-margin: 80px;
 
 body {
 	min-height: 100vh;
-	background-color: base.$base;
+	background-color: c.$base;
 	position: relative;
 	overflow: hidden;
-
-	$session-margin: 80px;
 
 	#session-settings {
 
@@ -17,7 +18,7 @@ body {
 		transform: translateY(-50%);
 		margin: auto;
 		width: min(571px, calc(100% - 2*$session-margin));
-		color: base.$form-color;
+		color: c.$form-color;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -27,7 +28,7 @@ body {
 		h1 {
 			text-align: center;
 			font-size: 40px;
-			line-height: 20px;
+			line-height: 100%;
 		}
 
 		#session-settings-body {
@@ -52,7 +53,7 @@ body {
 				}
 				.info-item {
 					justify-self: right;
-					color: base.$secondary;
+					color: c.$secondary;
 				}
 			}
 
@@ -64,7 +65,7 @@ body {
 
 			#session-form {
 				$row-form-height: 35px;
-				$row-btn-height: 35px;
+				$row-btn-height: $row-form-height;
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
 				grid-template-rows: repeat(4, $row-form-height);
@@ -81,7 +82,7 @@ body {
 					justify-self: right;
 					input {
 						margin-left: 25px;
-						color: base.$base;
+						color: c.$base;
 						text-align: right;
 						font-size: 24px;
 						width: 70px;
@@ -121,7 +122,7 @@ body {
 							width: $tgl-width;
 							height: $tgl-height;
 							border-radius: $tgl-height;
-							background-color: base.$secondary;
+							background-color: c.$secondary;
 							padding: $tgl-padding;
 							transition: 0.4s;
 							line-height: 14px;
@@ -137,7 +138,7 @@ body {
 								width: calc($tgl-height - 2*$tgl-padding);
 								border-radius: 50%;
 								content: "";
-								background-color: base.$primary;
+								background-color: c.$primary;
 							}
 
 							&:after {
@@ -149,22 +150,22 @@ body {
 								width: auto;
 								height: calc($tgl-height - 2*$tgl-padding);
 								line-height: calc($tgl-height - 2*$tgl-padding);
-								color: base.$base;
+								color: c.$base;
 								content: "Off";
 							}
 
 						}
 
 						input:checked+.slider {
-							background-color: base.$primary;
+							background-color: c.$primary;
 							&:before {
-								background-color: base.$base;
+								background-color: c.$base;
 								transform: translateX(calc($tgl-width - $tgl-height));
 								transition: 0.4s;
 							}
 							&:after {
 								content: "On";
-								color: base.$base;
+								color: c.$base;
 								padding: 0 0 0 $label-padding;
 								text-align: left;
 								left: $tgl-padding;
@@ -185,7 +186,7 @@ body {
 				input[type=number] {
 					width: 89px;
 					height: 100%;
-					background: base.$form-color;
+					background: c.$form-color;
 					border-radius: 4px;
 				}
 
@@ -215,7 +216,7 @@ body {
 			justify-content: center;
 
 			#viewer-message {
-				color: base.$primary;
+				color: c.$primary;
 				text-align: center;
 				font-size: 30px;
 				line-height: 30px;
@@ -267,7 +268,7 @@ body {
 
 			#timer {
 				text-align: left;
-				color: base.$primary;
+				color: c.$primary;
 				width: $timer-width;
 				height: $timer-height;
 				margin: auto;
@@ -276,7 +277,7 @@ body {
 				line-height: $timer-height;
 
 				&.red {
-					color: base.$accent;
+					color: c.$accent;
 				}
 
 			}
@@ -285,8 +286,8 @@ body {
 				width: 70px;
 				height: $timer-height;
 				border-radius: 40px;
-				background-color: base.$primary;
-				color: base.$base;
+				background-color: c.$primary;
+				color: c.$base;
 				img {
 					display: block;
 					margin: auto;
@@ -294,13 +295,13 @@ body {
 
 				&:hover {
 					transition: 0.1s;
-					background-color: base.$primary-dark;
+					background-color: c.$primary-dark;
 				}
 
 			}
 
 			#drawing-num {
-				color: base.$base;
+				color: c.$base;
 				text-align: right;
 				font-size: $timer-font-size;
 				line-height: $timer-height;

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { useSessionContext } from "../hooks/useSessionContext";
 
+import { useTranslation } from 'react-i18next';
+
 import Viewer from "../components/Viewer";
 import Timer from '../components/Timer';
 
@@ -33,7 +35,7 @@ const Session = () => {
 			if (currentSketchNum.current === sketchNum || queuePos.current === queue.length) {
 				// last stage, display final screen
 				setViewObject({
-					type: 'interval', message: 'Finished! You can close this tab.'
+					type: 'interval', message: "final_message"
 				})
 				setCountTime(null);
 				setIsFinished(true);
@@ -49,14 +51,14 @@ const Session = () => {
 			} else {
 				// queue[queuePos] is null, thus interval
 				setViewObject({
-					type: 'interval', message: 'interval'
+					type: 'interval', message: "interval"
 				});
 				setCountTime(interval);
 				setIsFinished(false);
 			}
 		} else if (queuePos.current === 0) {
 			setViewObject({
-				type: 'interval', message: 'Get ready'
+				type: 'interval', message: "get_ready"
 			});
 			setCountTime(5);
 			setIsFinished(false);
@@ -74,15 +76,23 @@ const Session = () => {
 		setIsFinished(true);
 	};
 
+	const { t, i18n } = useTranslation();
+
 	return (
 		<div id="session">
 			<Viewer viewObject={viewObject} />
 			<div id="player">
-				{ countTime && <Timer queuePos={queuePos.current} countTime={countTime} /> }
+				{ countTime &&
+				<Timer
+					queuePos={queuePos.current}
+					countTime={countTime}
+					text={{play: t("session.play"), pause: t("session.pause")}}
+				/>
+				}
 				<div className="flex-btn-space"></div>
 				{ !isFinished && <div className="flex-initial">
-					<button id="skip" className="player-btn" title="Skip" onClick={() => skip()}>
-						<img src={skipIcon} alt="skip" />
+					<button id="skip" className="player-btn" title={t("session.skip")} onClick={() => skip()}>
+						<img src={skipIcon} alt={t("session.skip")} />
 					</button>
 				</div>}
 				<div className="flex-auto"></div>

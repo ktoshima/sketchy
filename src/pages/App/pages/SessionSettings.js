@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 // import context
 import { useSessionContext } from "../hooks/useSessionContext";
@@ -71,19 +72,24 @@ const SessionSettings = () => {
 	const intervalInput = useId();
 	const shuffleButton = useId();
 
+	const { t, i18n } = useTranslation();
+	const currentLang = i18n.language;
+
 	return (
 		<div id="session-settings">
-			<h1 id="session-settings-title">Session Settings</h1>
+			<h1 id="session-settings-title"><span lang={currentLang}>{t("session_settings.session_settings")}</span></h1>
 			<div id="session-settings-body">
 				<div id="session-info">
-					<div className="info-title">Image Query</div>
+					<div className="info-title">{t("session_settings.image_query")}</div>
 					<div className="info-item">{imageQuery}</div>
-					<div className="info-title">Gallery Length</div>
+					<div className="info-title">{t("common.gallery_length")}</div>
 					<div className="info-item">{gallery ? gallery.length : 0}</div>
 				</div>
 				<hr />
 				<div id="session-form">
-					<label className="input-title" htmlFor={sketchNumInput}>Number of Sketch</label>
+					<label className="input-title" htmlFor={sketchNumInput}><span lang={currentLang}>
+						{t("session_settings.number_of_sketch")}
+					</span></label>
 					<div className="input-form">
 						<input
 							id={sketchNumInput}
@@ -96,7 +102,9 @@ const SessionSettings = () => {
 						/>
 						<label className="sublabel"></label>
 					</div>
-					<label className="input-title" htmlFor={sketchTimeMinInput}>Sketch Time</label>
+					<label className="input-title" htmlFor={sketchTimeMinInput}><span lang={currentLang}>
+						{t("session_settings.sketch_time")}
+					</span></label>
 					<div className="input-form">
 						<input
 							id={sketchTimeMinInput}
@@ -107,7 +115,9 @@ const SessionSettings = () => {
 							value={minute}
 							className={emptyFields.includes('sketchTime') ? 'error' : ''}
 						/>
-						<label className="sublabel" htmlFor={sketchTimeMinInput}>m</label>
+						<label className="sublabel" htmlFor={sketchTimeMinInput}><span lang={currentLang}>
+							{t("session_settings.minute")}
+						</span></label>
 						<input
 							id={sketchTimeSecInput}
 							type="number"
@@ -117,9 +127,13 @@ const SessionSettings = () => {
 							value={second}
 							className={emptyFields.includes('sketchTime') ? 'error' : ''}
 						/>
-						<label className="sublabel" htmlFor={sketchTimeSecInput}>s</label>
+						<label className="sublabel" htmlFor={sketchTimeSecInput}><span lang={currentLang}>
+							{t("session_settings.second")}
+						</span></label>
 					</div>
-					<label className="input-title" htmlFor={intervalInput}>Interval b/w Sketch</label>
+					<label className="input-title" htmlFor={intervalInput}><span lang={currentLang}>
+						{t("session_settings.interval_bw_sketch")}
+					</span></label>
 					<div className="input-form">
 						<input
 							id={intervalInput}
@@ -130,9 +144,13 @@ const SessionSettings = () => {
 							value={interval}
 							className={emptyFields.includes('interval') ? 'error' : ''}
 						/>
-						<label className="sublabel" htmlFor={intervalInput}>s</label>
+						<label className="sublabel" htmlFor={intervalInput}><span lang={currentLang}>
+							{t("session_settings.second")}
+						</span></label>
 					</div>
-					<label className="input-title switch-label" htmlFor={shuffleButton}>Shuffle Images</label>
+					<label className="input-title switch-label" htmlFor={shuffleButton}><span lang={currentLang}>
+						{t("session_settings.shuffle_images")}
+					</span></label>
 					<div className="switch input-form">
 						<label className="toggle" htmlFor={shuffleButton}>
 							<input
@@ -147,7 +165,13 @@ const SessionSettings = () => {
 					</div>
 				</div>
 			</div>
-			<button id="session-settings-button" title="Start Session" onClick={() => handleStartSession()}>START SESSION</button>
+			<button
+				id="session-settings-button"
+				title={t("session_settings.start_session")}
+				onClick={() => handleStartSession()}
+			>
+				<span lang={currentLang}>{t("session_settings.start_session").toUpperCase()}</span>
+			</button>
 			{ Boolean(error.length) && error.map((e) =>(<div className="error"> { e } </div>)) }
 		</div>
 	)

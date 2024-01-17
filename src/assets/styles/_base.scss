@@ -1,53 +1,46 @@
 // _base.scss
 
-$font-family: 'NTR';
-$font-weight: 400;
-$base: #4C4C4C;
-$primary: #F4F0E5;
-$primary-dark: #C6C6C5;
-$secondary: #A7A19B;
-$secondary-dark: #938B83;
-$form-color: #D3CCC1;
-$accent: #D44C45;
-$accent-dark: #BE3A33;
+// load colors
+@use 'colors' as c;
+
+// load fonts
+@use 'fonts' as f;
 
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	border: none;
+	font-family: f.$font-family, f.$font-family-jp, sans-serif;
+	font-weight: f.$font-weight;
 }
 
-body {
-	font-family: $font-family;
-	font-weight: $font-weight;
+span:lang(ja) {
+	font-family: f.$font-family-jp, sans-serif;
+	font-size: 85%;
+}
 
-	button {
-		font-family: $font-family;
-		font-weight: $font-weight;
-		background-color: $accent;
-		color: $primary;
-		border: none;
-		border-radius: 200px;
-		cursor: pointer;
+button {
+	background-color: c.$accent;
+	color: c.$primary;
+	border: none;
+	border-radius: 200px;
+	cursor: pointer;
 
-		&:hover {
-			background-color: $accent-dark;
-			// color: $primary-dark;
-			transition: 0.1s;
-		}
+	&:hover {
+		background-color: c.$accent-dark;
+		transition: 0.1s;
+	}
 
-		&:disabled {
-			background-color: $secondary;
-			color: $base;
-			cursor: not-allowed;
-		}
+	&:disabled {
+		background-color: c.$secondary;
+		color: c.$base;
+		cursor: not-allowed;
+	}
 
-		&:disabled:hover {
-			background-color: $secondary-dark;
-			transition: 0.1s;
-		}
-
+	&:disabled:hover {
+		background-color: c.$secondary-dark;
+		transition: 0.1s;
 	}
 
 }
