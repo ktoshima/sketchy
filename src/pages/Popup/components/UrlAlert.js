@@ -1,9 +1,9 @@
 import AlertIcon from '../../../assets/images/url_alert.svg';
 
-const UrlAlert = ({alertText}) => (
+const UrlAlert = ({alertText, currentLang}) => (
 	<div className="url-alert">
 		<img src={AlertIcon} alt="" />
-		<div>{ alertText }</div>
+		<div><span lang={currentLang}>{ alertText }</span></div>
 	</div>
 );
 

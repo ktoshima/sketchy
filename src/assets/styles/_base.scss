@@ -15,8 +15,9 @@
 	font-weight: f.$font-weight;
 }
 
-:lang(ja) {
-	font-size: 80%;
+span:lang(ja) {
+	font-family: f.$font-family-jp, sans-serif;
+	font-size: 85%;
 }
 
 button {

@@ -76,7 +76,8 @@ const Popup = () => {
 
 	const galleryLengthInput = useId();
 
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
+	const currentLang = i18n.language;
 
 	return (
 		<>
@@ -85,7 +86,7 @@ const Popup = () => {
 				{ tabURL && (
 					<>
 						<div className="setting">
-							<label htmlFor={galleryLengthInput}>{t("common.gallery_length")}</label>
+							<label htmlFor={galleryLengthInput}><span lang={currentLang}>{t("common.gallery_length")}</span></label>
 							<input
 								id={galleryLengthInput}
 								type="number"
@@ -106,7 +107,7 @@ const Popup = () => {
 									<img src={
 										isCreatingGallery ? CreateGalleryIconDark : CreateGalleryIconLight
 										} alt="" />
-									<span>{t("popup.create_gallery").toUpperCase()}</span>
+									<span lang={currentLang}>{t("popup.create_gallery").toUpperCase()}</span>
 								</div>
 
 							</button>
@@ -119,14 +120,14 @@ const Popup = () => {
 									<img src={
 										!(gallery && gallery.length) ? OpenSessionIconDark : OpenSessionIconLight
 									} alt="" />
-									<span>{t("popup.open_session").toUpperCase()}</span>
+									<span lang={currentLang}>{t("popup.open_session").toUpperCase()}</span>
 								</div>
 							</button>
 						</div>
 					</>
 				) }
 				{ invalidURL && (
-					<UrlAlert alertText={t("popup.url_alert_text")} />
+					<UrlAlert alertText={t("popup.url_alert_text")} currentLang={currentLang} />
 				) }
 			</div>
 			<Background />
