@@ -8,7 +8,7 @@ i18n
 	.use(initReactI18next)
 	.use(LanguageDetector)
 	.init({
-		// set English default language
+		// set English as fallback language
 		fallbackLng: 'en',
 
 		// default language for debug purpose
