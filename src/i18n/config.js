@@ -9,11 +9,11 @@ i18n
 	.use(LanguageDetector)
 	.init({
 		// set English default language
-		// fallbackLng: 'en',
+		fallbackLng: 'en',
 
 		// default language for debug purpose
 		// lng: 'en',
-		lng: 'ja',
+		// lng: 'ja',
 
 		returnEmptyString: false,
 		resources: {
