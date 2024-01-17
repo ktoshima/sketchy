@@ -62,8 +62,7 @@ module.exports = (env, argv) => {
 	}
 
 	// browser type config
-	// until chrome 121 rolls out, separate manifest file is neccesary to avoid Chrome refusing to load manifest with background.scripts
-	// latest version of Firefox and Safari supports both bachground.scripts and background.service_worker being in manifest.json
+	// Chrome refuses to load manifest.json with barckground.scripts, thus needs separate manifest file with background.service_worker
 	if (env.browser === 'chrome') {
 		config.plugins.push(
 			new CopyPlugin({
@@ -75,7 +74,20 @@ module.exports = (env, argv) => {
 				]
 			})
 		)
-	} else  {
+	// Firefox raises warning when background.service_worker is present in manifest.json
+	// thus creates separate manifest file with only background.scripts to suppress warning
+	} else if (env.browser === 'firefox') {
+		config.plugins.push(
+			new CopyPlugin({
+				patterns: [
+					{
+						from: './src/manifest-firefox.json',
+						to: path.join(__dirname, 'dist', env.browser, 'manifest.json')
+					},
+				]
+			})
+		)
+	} else {
 		config.plugins.push(
 			new CopyPlugin({
 				patterns: [
