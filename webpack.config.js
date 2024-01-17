@@ -55,50 +55,37 @@ const config = {
 	],
 };
 
+const modifyManifest = (browser, content) => {
+	const manifest = JSON.parse(content.toString());
+	if (browser === 'chrome') {
+		// remove manifest.background.scripts from manifest.json for chrome
+		// to avoid Chrome refusing to load manifest with background.scripts
+		delete manifest.background.scripts;
+	} else if (browser === 'firefox') {
+		// remove manifest.background.service_worker from manifest.json for firefox
+		// to avoid Firefox raising warning upon loading manifest with background.service_worker
+		delete manifest.background.service_worker;
+	}
+	return JSON.stringify(manifest, null, 2);
+}
+
 module.exports = (env, argv) => {
 	config.output = {
 		path: path.resolve(__dirname, 'dist', env.browser),
 		filename: '[name].bundle.js',
 	}
 
-	// browser type config
-	// Chrome refuses to load manifest.json with barckground.scripts, thus needs separate manifest file with background.service_worker
-	if (env.browser === 'chrome') {
-		config.plugins.push(
-			new CopyPlugin({
-				patterns: [
-					{
-						from: './src/manifest-chrome.json',
-						to: path.join(__dirname, 'dist', env.browser, 'manifest.json')
-					},
-				]
-			})
-		)
-	// Firefox raises warning when background.service_worker is present in manifest.json
-	// thus creates separate manifest file with only background.scripts to suppress warning
-	} else if (env.browser === 'firefox') {
-		config.plugins.push(
-			new CopyPlugin({
-				patterns: [
-					{
-						from: './src/manifest-firefox.json',
-						to: path.join(__dirname, 'dist', env.browser, 'manifest.json')
-					},
-				]
-			})
-		)
-	} else {
-		config.plugins.push(
-			new CopyPlugin({
-				patterns: [
-					{
-						from: './src/manifest.json',
-						to: path.join(__dirname, 'dist', env.browser, 'manifest.json')
-					},
-				]
-			})
-		)
-	}
+	config.plugins.push(
+		new CopyPlugin({
+			patterns: [
+				{
+					from: './src/manifest.json',
+					to: path.join(__dirname, 'dist', env.browser, 'manifest.json'),
+					transform: (content, _path) => modifyManifest(env.browser, content)
+				},
+			]
+		})
+	)
 	// compile mode config
 	// use inline-source-map in development mode for debug purpose
 	// use MiniCssExtractPluging in production mode to separate css files for optimization
