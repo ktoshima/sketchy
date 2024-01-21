@@ -10,10 +10,6 @@ const config = {
 		background: './src/background/background.js',
 		contentScript: './src/contentScript/contentScript.js',
 	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].bundle.js',
-	},
 	module: {
 		rules: [
 			{
@@ -44,14 +40,6 @@ const config = {
 		]
 	},
 	plugins: [
-		new CopyPlugin({
-			patterns: [
-				{
-					from: './src/manifest.json',
-					to: path.join(__dirname, 'dist')
-				},
-			]
-		}),
 		new HtmlWebpackPlugin({
 			template: './src/pages/Popup/index.html',
 			filename: 'popup.html',
@@ -67,7 +55,40 @@ const config = {
 	],
 };
 
-module.exports = (_env, argv) => {
+const modifyManifest = (browser, content) => {
+	const manifest = JSON.parse(content.toString());
+	if (browser === 'chrome') {
+		// remove manifest.background.scripts from manifest.json for chrome
+		// to avoid Chrome refusing to load manifest with background.scripts
+		delete manifest.background.scripts;
+	} else if (browser === 'firefox') {
+		// remove manifest.background.service_worker from manifest.json for firefox
+		// to avoid Firefox raising warning upon loading manifest with background.service_worker
+		delete manifest.background.service_worker;
+	}
+	return JSON.stringify(manifest, null, 2);
+}
+
+module.exports = (env, argv) => {
+	config.output = {
+		path: path.resolve(__dirname, 'dist', env.browser),
+		filename: '[name].bundle.js',
+	}
+
+	config.plugins.push(
+		new CopyPlugin({
+			patterns: [
+				{
+					from: './src/manifest.json',
+					to: path.join(__dirname, 'dist', env.browser, 'manifest.json'),
+					transform: (content, _path) => modifyManifest(env.browser, content)
+				},
+			]
+		})
+	)
+	// compile mode config
+	// use inline-source-map in development mode for debug purpose
+	// use MiniCssExtractPluging in production mode to separate css files for optimization
 	if (argv.mode === 'development') {
 		config.devtool = 'inline-source-map';
 		config.module.rules.push(
@@ -80,8 +101,7 @@ module.exports = (_env, argv) => {
 				],
 			}
 		)
-	}
-	if (argv.mode === 'production') {
+	} else if (argv.mode === 'production') {
 		config.plugins.push(new MiniCssExtractPlugin());
 		config.module.rules.push(
 			{

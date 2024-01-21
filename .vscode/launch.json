@@ -6,8 +6,8 @@
 			"request": "launch",
 			"reAttach": true,
 			"name": "Launch extension",
-			"addonPath": "${workspaceFolder}/dist",
-			"preLaunchTask": "npm: build:dev",
+			"addonPath": "${workspaceFolder}/dist/firefox",
+			"preLaunchTask": "npm: build:dev:firefox",
 			"pathMappings": [
 				{
 					"url": "webpack://sketchy/src",

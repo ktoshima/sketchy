@@ -1,11 +1,15 @@
-
+import { useTranslation } from 'react-i18next';
 
 const Viewer = ({ viewObject }) => {
+
+	const { t, i18n } = useTranslation();
 
 	return (
 		<div id="viewer">
 			{viewObject && viewObject.type === 'interval' &&
-				<div id="viewer-message"> {viewObject.message} </div>
+				<div id="viewer-message">
+					{t("session.viewer_message."+viewObject.message)}
+				</div>
 			}
 			{viewObject && viewObject.type === 'drawing' &&
 				<>

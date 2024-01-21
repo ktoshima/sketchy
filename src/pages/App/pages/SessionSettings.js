@@ -1,8 +1,11 @@
 import { useEffect, useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 // import context
 import { useSessionContext } from "../hooks/useSessionContext";
+
+const browser = require("webextension-polyfill");
 
 const SessionSettings = () => {
 	const {
@@ -21,7 +24,7 @@ const SessionSettings = () => {
 	const [error, setError] = useState([]);
 	const navigate = useNavigate();
 
-	// request gallery when initialized
+	// request gallery from background script when initialized
 	useEffect(() => {
 		const requestGallery = () => {
 			browser.runtime.sendMessage({
@@ -69,72 +72,86 @@ const SessionSettings = () => {
 	const intervalInput = useId();
 	const shuffleButton = useId();
 
+	const { t, i18n } = useTranslation();
+	const currentLang = i18n.language;
+
 	return (
 		<div id="session-settings">
-			<h1>Session Settings</h1>
-			<div id="session-info">
-				<div className="session-info_row">
-					<div className="session-info_row_title">Image Query</div>
-					<div className="session-info_row_item">{imageQuery}</div>
+			<h1 id="session-settings-title"><span lang={currentLang}>{t("session_settings.session_settings")}</span></h1>
+			<div id="session-settings-body">
+				<div id="session-info">
+					<div className="info-title">{t("session_settings.image_query")}</div>
+					<div className="info-item">{imageQuery}</div>
+					<div className="info-title">{t("common.gallery_length")}</div>
+					<div className="info-item">{gallery ? gallery.length : 0}</div>
 				</div>
-				<div className="session-info_row">
-					<div className="session-info_row_title">Gallery Length</div>
-					<div className="session-info_row_item">{gallery ? gallery.length : 0}</div>
-				</div>
-			</div>
-			<hr />
-			<div id="session-form">
-				<label className="input-title" htmlFor={sketchNumInput}>Number of Sketch</label>
-				<div className="input-form">
-					<input
-						id={sketchNumInput}
-						type="number"
-						step="1"
-						min="1"
-						onChange={(e) => setSketchNum(Number(e.target.value))}
-						value={sketchNum}
-						className={emptyFields.includes('sketchNum') ? 'error' : ''}
-					/>
-					<label className="sublabel"></label>
-				</div>
-				<label className="input-title" htmlFor={sketchTimeMinInput}>Sketch Time</label>
-				<div className="input-form">
-					<input
-						id={sketchTimeMinInput}
-						type="number"
-						step="1"
-						min="0"
-						onChange={(e) => setMinute(Number(e.target.value))}
-						value={minute}
-						className={emptyFields.includes('sketchTime') ? 'error' : ''}
-					/>
-					<label className="sublabel" htmlFor={sketchTimeMinInput}>m</label>
-					<input
-						id={sketchTimeSecInput}
-						type="number"
-						step="1"
-						min="0"
-						onChange={(e) => setSecond(Number(e.target.value))}
-						value={second}
-						className={emptyFields.includes('sketchTime') ? 'error' : ''}
-					/>
-					<label className="sublabel" htmlFor={sketchTimeSecInput}>s</label>
-				</div>
-				<label className="input-title" htmlFor={intervalInput}>Interval b/w Sketch</label>
-				<div className="input-form">
-					<input
-						id={intervalInput}
-						type="number"
-						step="1"
-						min="0"
-						onChange={(e) => setInterval(Number(e.target.value))}
-						value={interval}
-						className={emptyFields.includes('interval') ? 'error' : ''}
-					/>
-					<label className="sublabel" htmlFor={intervalInput}>s</label>
-				</div>
-				<div className="switch-row">
-					<div className="switch">
+				<hr />
+				<div id="session-form">
+					<label className="input-title" htmlFor={sketchNumInput}><span lang={currentLang}>
+						{t("session_settings.number_of_sketch")}
+					</span></label>
+					<div className="input-form">
+						<input
+							id={sketchNumInput}
+							type="number"
+							step="1"
+							min="1"
+							onChange={(e) => setSketchNum(Number(e.target.value))}
+							value={sketchNum}
+							className={emptyFields.includes('sketchNum') ? 'error' : ''}
+						/>
+						<label className="sublabel"></label>
+					</div>
+					<label className="input-title" htmlFor={sketchTimeMinInput}><span lang={currentLang}>
+						{t("session_settings.sketch_time")}
+					</span></label>
+					<div className="input-form">
+						<input
+							id={sketchTimeMinInput}
+							type="number"
+							step="1"
+							min="0"
+							onChange={(e) => setMinute(Number(e.target.value))}
+							value={minute}
+							className={emptyFields.includes('sketchTime') ? 'error' : ''}
+						/>
+						<label className="sublabel" htmlFor={sketchTimeMinInput}><span lang={currentLang}>
+							{t("session_settings.minute")}
+						</span></label>
+						<input
+							id={sketchTimeSecInput}
+							type="number"
+							step="1"
+							min="0"
+							onChange={(e) => setSecond(Number(e.target.value))}
+							value={second}
+							className={emptyFields.includes('sketchTime') ? 'error' : ''}
+						/>
+						<label className="sublabel" htmlFor={sketchTimeSecInput}><span lang={currentLang}>
+							{t("session_settings.second")}
+						</span></label>
+					</div>
+					<label className="input-title" htmlFor={intervalInput}><span lang={currentLang}>
+						{t("session_settings.interval_bw_sketch")}
+					</span></label>
+					<div className="input-form">
+						<input
+							id={intervalInput}
+							type="number"
+							step="1"
+							min="0"
+							onChange={(e) => setInterval(Number(e.target.value))}
+							value={interval}
+							className={emptyFields.includes('interval') ? 'error' : ''}
+						/>
+						<label className="sublabel" htmlFor={intervalInput}><span lang={currentLang}>
+							{t("session_settings.second")}
+						</span></label>
+					</div>
+					<label className="input-title switch-label" htmlFor={shuffleButton}><span lang={currentLang}>
+						{t("session_settings.shuffle_images")}
+					</span></label>
+					<div className="switch input-form">
 						<label className="toggle" htmlFor={shuffleButton}>
 							<input
 								id={shuffleButton}
@@ -144,11 +161,17 @@ const SessionSettings = () => {
 							/>
 							<span className="slider"></span>
 						</label>
+						<label className="sublabel"></label>
 					</div>
-					<label className="switch-label" htmlFor={shuffleButton}>Shuffle Images</label>
 				</div>
 			</div>
-			<button title="Start Session" onClick={() => handleStartSession()}>START SESSION</button>
+			<button
+				id="session-settings-button"
+				title={t("session_settings.start_session")}
+				onClick={() => handleStartSession()}
+			>
+				<span lang={currentLang}>{t("session_settings.start_session").toUpperCase()}</span>
+			</button>
 			{ Boolean(error.length) && error.map((e) =>(<div className="error"> { e } </div>)) }
 		</div>
 	)

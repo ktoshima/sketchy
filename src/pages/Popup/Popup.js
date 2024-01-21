@@ -1,10 +1,13 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Background from './components/Background';
 import UrlAlert from './components/UrlAlert';
 import CreateGalleryIconLight from '../../assets/images/create_gallery-icon-primary.svg';
 import CreateGalleryIconDark from '../../assets/images/create_gallery-icon-base.svg';
 import OpenSessionIconLight from '../../assets/images/open_session-icon-primary.svg';
 import OpenSessionIconDark from '../../assets/images/open_session-icon-base.svg';
+
+const browser = require("webextension-polyfill");
 
 const Popup = () => {
 	const currentTab = useRef(null);
@@ -16,15 +19,17 @@ const Popup = () => {
 
 	// run only once initialized
 	useEffect(() => {
-		// get current tab id and URL, decide if URL is google image search
+		// get current tab id and URL, decide if URL contains flag for google image search (tbm=isch)
 		browser.tabs.query({active: true, currentWindow: true})
 			.then((tabArray) => {
 				currentTab.current = tabArray[0];
 				if (currentTab.current.url) {
 					const currentURL = new URL(currentTab.current.url);
 					if (currentURL.searchParams.get('tbm') === 'isch') {
+						// will render gallery creation menu
 						setTabURL(currentURL);
 					} else {
+						// will render invalid url alert
 						setInvalidURL(true);
 					}
 				}
@@ -33,9 +38,7 @@ const Popup = () => {
 
 	const createGallery = () => {
 		setIsCreatingGallery(true);
-		// initiate gallery creation by sending a message to content script
-		// sending message to content script is only supported through tabs.sendMessage
-		console.log(maxGalleryLen);
+		// if user manages to input galleryLen > 50, cap it at 50
 		let sendMaxGalleryLen;
 		if (maxGalleryLen > 50) {
 			setMaxGalleryLen(50);
@@ -43,6 +46,8 @@ const Popup = () => {
 		} else {
 			sendMaxGalleryLen = maxGalleryLen;
 		}
+		// initiate gallery creation by sending a message to content script
+		// sending message to content script is only supported through tabs.sendMessage
 		browser.tabs.sendMessage(
 			currentTab.current.id,
 			{
@@ -62,13 +67,17 @@ const Popup = () => {
 			type: "open_session",
 			image_query: tabURL.searchParams.get('q'),
 			gallery: gallery
+		}).then((_response) => {
+			// close popup after response from background script
+			window.close();
 		});
-		window.close();
 	};
 
 
 	const galleryLengthInput = useId();
 
+	const { t, i18n } = useTranslation();
+	const currentLang = i18n.language;
 
 	return (
 		<>
@@ -77,7 +86,7 @@ const Popup = () => {
 				{ tabURL && (
 					<>
 						<div className="setting">
-							<label htmlFor={galleryLengthInput}>Gallery Length</label>
+							<label htmlFor={galleryLengthInput}><span lang={currentLang}>{t("common.gallery_length")}</span></label>
 							<input
 								id={galleryLengthInput}
 								type="number"
@@ -90,7 +99,7 @@ const Popup = () => {
 						</div>
 						<div className='buttons'>
 							<button
-								title='Create Gallery'
+								title={t("popup.create_gallery")}
 								className={isCreatingGallery ? "inProgress" : ""}
 								disabled={isCreatingGallery} onClick={() => createGallery()}
 							>
@@ -98,12 +107,12 @@ const Popup = () => {
 									<img src={
 										isCreatingGallery ? CreateGalleryIconDark : CreateGalleryIconLight
 										} alt="" />
-									<span>CREATE GALLERY</span>
+									<span lang={currentLang}>{t("popup.create_gallery").toUpperCase()}</span>
 								</div>
 
 							</button>
 							<button
-								title='Open Session'
+								title={t("popup.open_session")}
 								disabled={!(gallery && gallery.length)}
 								onClick={() => {openSession();}}
 							>
@@ -111,14 +120,14 @@ const Popup = () => {
 									<img src={
 										!(gallery && gallery.length) ? OpenSessionIconDark : OpenSessionIconLight
 									} alt="" />
-									<span>OPEN SESSION</span>
+									<span lang={currentLang}>{t("popup.open_session").toUpperCase()}</span>
 								</div>
 							</button>
 						</div>
 					</>
 				) }
 				{ invalidURL && (
-					<UrlAlert />
+					<UrlAlert alertText={t("popup.url_alert_text")} currentLang={currentLang} />
 				) }
 			</div>
 			<Background />
